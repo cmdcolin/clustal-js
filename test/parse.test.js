@@ -1,17 +1,11 @@
-import ClustalParser from '../src'
+import {parseFile} from '../src'
 
 test('a large clustal', async () => {
-  const p = new ClustalParser({
-    filename: require.resolve('./data/p53.clustal'),
-  })
-  const res = await p.parse()
+  const res = await parseFile(require.resolve('./data/p53.clustal'))
   expect(res).toMatchSnapshot()
 })
 
 test('a smaller clustal', async () => {
-  const p = new ClustalParser({
-    filename: require.resolve('./data/file.aln'),
-  })
-  const res = await p.parse()
+  const res = await parseFile(require.resolve('./data/file.aln'))
   expect(res).toMatchSnapshot()
 })
