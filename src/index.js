@@ -184,7 +184,7 @@ export default class ClustalParser {
         line = arr.next().value
       }
     }
-  console.log(consensus,seqs, ids)
+  console.log( {consensus,seqs,ids,header,version})
   return {consensus,seqs,ids,header,version}
 
     // assert len(ids) == len(seqs)
