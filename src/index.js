@@ -1,3 +1,4 @@
+import assert from 'assert'
 import LocalFile from './localFile'
 
 export default class ClustalParser {
@@ -10,9 +11,8 @@ export default class ClustalParser {
   async parse() {
     const contents = (await this.clustal.readFile()).toString().split('\n')
     const arr = contents[Symbol.iterator]()
-    let line = arr.next()
-    if (line.done) throw new Error('empty file')
-    else line = line.value
+    let line = arr.next().value
+    assert(line, 'Empty file')
 
     const knownHeaders = [
       'CLUSTAL O',
@@ -32,151 +32,160 @@ export default class ClustalParser {
     }
 
     let version
-    const words = rest.split(' ')
+    const words = rest.split(/\s+/)
     for (let word of words) {
-      if (word[0] === '(' && word[word.length-1] === ')') {
+      if (word[0] === '(' && word[word.length - 1] === ')') {
         word = word.substring(1, word.length - 1)
-        console.log(word)
       }
       if ('0123456789'.includes(word[0])) {
         version = word
         break
       }
     }
-    console.log(header, version)
-    //There should be two blank lines after the header line
+    // There should be two blank lines after the header line
     line = arr.next().value
-    while(line.trim() === "") {
-        line = arr.next().value
+    while (line.trim() === '') {
+      line = arr.next().value
     }
 
     const ids = []
     const seqs = []
-    const consensus = ""
-    let seq_cols = null
+    let consensus = ''
+    let seqCols = null
 
-    //Use the first block to get the sequence identifiers
-    while(true) {
-        if(line[0] !== " " && line.trim() !== "") {
-            //Sequences identifier...
-            const fields = line.trimEnd().split(' ')
-            console.log(fields)
+    // Use the first block to get the sequence identifiers
+    while (line) {
+      if (line[0] !== ' ' && line.trim() !== '') {
+        // Sequences identifier...
+        const fields = line.trimEnd().split(/\s+/)
 
-            //We expect there to be two fields, there can be an optional
-            //"sequence number" field containing the letter count.
-            if(fields.length !== 2)
-                throw new Error("Could not parse line:\n"+line)
+        // We expect there to be two fields, there can be an optional
+        // "sequence number" field containing the letter count.
+        if (fields.length < 2 || fields.length > 3)
+          throw new Error(`Could not parse line:\n${line}`)
 
-            ids.append(fields[0])
-            seqs.append(fields[1])
+        ids.push(fields[0])
+        seqs.push(fields[1])
 
-            //Record the sequence position to get the consensus
-            if(seq_cols === null) {
-                start = fields[0].length + line.slice(fields[0].length).find(fields[1])
-                end = start + fields[1].length
-                seq_cols = [start, end]
-            }
-            console.log(fields[1], line.slice(start, end))
-        }//remove
-    }//remove
+        // Record the sequence position to get the consensus
+        if (seqCols === null) {
+          const temp = line.slice(fields[0].length)
+          const start = fields[0].length + temp.indexOf(fields[1])
+          const end = start + fields[1].length
+          seqCols = [start, end]
+        }
+        if (fields.length === 3) {
+          // This MAY be an old style file with a letter count...
+          const letters = parseInt(fields[2], 10)
+          if (Number.isNaN(letters))
+            throw new Error(
+              `Could not parse line, bad sequence number:\n${line}`,
+            )
+          if (fields[1].replace('-', '').length !== letters)
+            throw new Error(
+              `Could not parse line, invalid sequence number:\n${line}`,
+            )
+        }
+      } else if (line[0] === ' ') {
+        // Sequence consensus line...
+        if (ids.length !== seqs.length || ids.length === 0)
+          throw new Error(`Failed to parse, expecting consensus line:\n${line}`)
+        if (seqCols === null)
+          throw new Error(
+            `Failed to find what cosntitutes the seq columns to get the consensus line:\n${line}`,
+          )
+        consensus = line.slice(seqCols[0], seqCols[1])
+        line = arr.next().value
+        if (line && line.trim() !== '') throw new Error('Expected blank line: '+line)
+        break
+      } else {
+        // No consensus line
+        consensus = ' '.repeat(seqCols[1]-seqCols[0])
+        break
+      }
+      line = arr.next().value
+    }
 
-//             if len(fields) == 3:
-//                 #This MAY be an old style file with a letter count...
-//                 try:
-//                     letters = int(fields[2])
-//                 except ValueError:
-//                     raise ValueError("Could not parse line, bad sequence number:\n%s" % line)
-//                 if len(fields[1].replace("-","")) != letters:
-//                     raise ValueError("Could not parse line, invalid sequence number:\n%s" % line)
-//         elif line[0] == " ":
-//             #Sequence consensus line...
-//             assert len(ids) == len(seqs)
-//             assert len(ids) > 0
-//             assert seq_cols is not None
-//             consensus = line[seq_cols]
-//             assert not line[:seq_cols.start].strip()
-//             assert not line[seq_cols.stop:].strip()
-//             #Check for blank line (or end of file)
-//             line = handle.readline()
-//             assert line.strip() == ""
-//             break
-//         else:
-//             #No consensus
-//             break
-//         line = handle.readline()
-//         if not line : break #end of file
+    // Confirm all same length
+    for (const s of seqs) assert(s.length === seqs[0].length)
+    if (consensus) assert(consensus.length === seqs[0].length)
 
-    // assert line.strip() == ""
-    // assert seq_cols is not None
+    let done = false
+    while (!done) {
+      // There should be a blank line between each block.
+      // Also want to ignore any consensus line from the
+      // previous block.
+      while (line && line.trim() === '') {
+        line = arr.next().value
+      }
+      if (!line) break // end of file
 
-    // #Confirm all same length
-    // for s in seqs:
-    //     assert len(s) == len(seqs[0])
-    // if consensus:
-    //     assert len(consensus) == len(seqs[0])
+      // if (knownHeaders.includes(line.split(/\s+/, 1)[0])) {
+      //   // Found concatenated alignment.
+      //   done = true
+      //   break
+      // }
+      for (let i = 0; i < ids.length; i += 1) {
+        assert(line[0] !== ' ', `Unexpected line:\n${line}`)
+        const fields = line.trimEnd().split(/\s+/)
 
-    // #Loop over any remaining blocks...
-    // done = False
-    // while not done:
-    //     #There should be a blank line between each block.
-    //     #Also want to ignore any consensus line from the
-    //     #previous block.
-    //     while (not line) or line.strip() == "":
-    //         line = handle.readline()
-    //         if not line : break # end of file
-    //     if not line : break # end of file
+        // We expect there to be two fields, there can be an optional
+        // "sequence number" field containing the letter count.
+        if (fields.length < 2 || fields.length > 3)
+          throw new Error(`Could not parse line:\n${line}`)
 
-    //     if line.split(None,1)[0] in known_headers:
-    //         #Found concatenated alignment.
-    //         done = True
-    //         self._header = line
-    //         break
+        if (fields[0] !== ids[i])
+          throw new Error(
+            `Identifiers out of order? Got '${fields[0]}' but expected '${
+              ids[i]
+            }'`,
+          )
 
-    //     for i in range(len(ids)):
-    //         assert line[0] != " ", "Unexpected line:\n%s" % repr(line)
-    //         fields = line.rstrip().split()
+        if (fields[1] !== line.slice(seqCols[0], seqCols[1])) {
+          const temp = line.slice(fields[0].length)
+          const start = fields[0].length + temp.indexOf(fields[1])
+          assert(
+            start === seqCols[0],
+            `Old location ${seqCols} -> ${start}:XX`,
+          )
+          const end = start + fields[1].length
+          seqCols = [start, end]
+        }
 
-    //         #We expect there to be two fields, there can be an optional
-    //         #"sequence number" field containing the letter count.
-    //         if len(fields) < 2 or len(fields) > 3:
-    //             raise ValueError("Could not parse line:\n%s" % repr(line))
+        // Append the sequence
+        seqs[i] += fields[1]
+        assert(seqs[i].length === seqs[0].length)
 
-    //         if fields[0] != ids[i]:
-    //             raise ValueError("Identifiers out of order? Got '%s' but expected '%s'" \
-    //                               % (fields[0], ids[i]))
-
-    //         if fields[1] != line[seq_cols]:
-    //             start = len(fields[0]) + line[len(fields[0]):].find(fields[1])
-    //             assert start == seq_cols.start, 'Old location %s -> %i:XX' % (seq_cols, start)
-    //             end = start + len(fields[1])
-    //             seq_cols = slice(start, end)
-    //             del start, end
-
-    //         #Append the sequence
-    //         seqs[i] += fields[1]
-    //         assert len(seqs[i]) == len(seqs[0])
-
-    //         if len(fields) == 3:
-    //             #This MAY be an old style file with a letter count...
-    //             try:
-    //                 letters = int(fields[2])
-    //             except ValueError:
-    //                 raise ValueError("Could not parse line, bad sequence number:\n%s" % line)
-    //             if len(seqs[i].replace("-","")) != letters:
-    //                 raise ValueError("Could not parse line, invalid sequence number:\n%s" % line)
-
-    //         #Read in the next line
-    //         line = handle.readline()
-    //     #There should now be a consensus line
-    //     if consensus:
-    //         assert line[0] == " "
-    //         assert seq_cols is not None
-    //         consensus += line[seq_cols]
-    //         assert len(consensus) == len(seqs[0])
-    //         assert not line[:seq_cols.start].strip()
-    //         assert not line[seq_cols.stop:].strip()
-    //         #Read in the next line
-    //         line = handle.readline()
+        if (fields.length === 3) {
+          // This MAY be an old style file with a letter count...
+          const letters = parseInt(fields[2], 10)
+          if (Number.isNaN(letters)) {
+            throw new Error(
+              `Could not parse line, bad sequence number:\n${line}`,
+            )
+          }
+          if (seqs[i].replace('-', '').length !== letters) {
+            throw new Error(
+              `Could not parse line, invalid sequence number:\n${line}`,
+            )
+          }
+        }
+        line = arr.next().value
+      }
+      // There should now be a consensus line
+      if (consensus) {
+        assert(line[0] === ' ')
+        assert(seqCols !== null)
+        consensus += line[seqCols]
+        // assert len(consensus) == len(seqs[0])
+        // assert not line[:seqCols.start].strip()
+        // assert not line[seqCols.stop:].strip()
+        // Read in the next line
+        line = arr.next().value
+      }
+    }
+  console.log(consensus,seqs, ids)
+  return {consensus,seqs,ids,header,version}
 
     // assert len(ids) == len(seqs)
     // if len(seqs) == 0 or len(seqs[0]) == 0:

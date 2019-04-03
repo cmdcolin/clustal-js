@@ -1,9 +1,17 @@
 import ClustalParser from '../src'
 
-test('wtf', async () => {
+test('a large clustal', async () => {
   const p = new ClustalParser({
     filename: require.resolve('./data/p53.clustal'),
   })
-  await p.parse()
-  expect(1).toEqual(1)
+  const res = await p.parse()
+  expect(res).toMatchSnapshot()
+})
+
+test('a smaller clustal', async () => {
+  const p = new ClustalParser({
+    filename: require.resolve('./data/file.aln'),
+  })
+  const res = await p.parse()
+  expect(res).toMatchSnapshot()
 })
