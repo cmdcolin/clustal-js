@@ -1,7 +1,14 @@
 import assert from "assert";
 import LocalFile from "./localFile";
 
-export function parse(arr) {
+interface Results {
+  version: string;
+  header: string;
+  seqs: string[];
+  consensus: string;
+  ids: string[];
+}
+export function parse(arr: Symbol.iterator): Results {
   let line = arr.next().value;
   assert(line !== undefined, "Empty file");
 
@@ -14,7 +21,7 @@ export function parse(arr) {
     "PROBCONS",
     "MUSCLE"
   ];
-  const header = knownHeaders.find(l => line.startsWith(l));
+  const header = knownHeaders.find((l: string): boolean => line.startsWith(l));
   const rest = line.slice(header.length);
   if (header === undefined) {
     throw new Error(
@@ -196,11 +203,11 @@ export function parse(arr) {
   //     assert len(consensus) == alignment_length, \
   //            "Alignment length is %i, consensus length is %i, '%s'" \
 }
-export function parseString(contents) {
+export function parseString(contents: string): Results {
   const iter = contents.split("\n")[Symbol.iterator]();
   return parse(iter);
 }
-export async function parseFile(filename) {
+export async function parseFile(filename: string): Promise<Results> {
   const f = new LocalFile(filename);
   const contents = await f.readFile();
   return parseString(contents.toString());

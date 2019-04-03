@@ -1,4 +1,4 @@
-import ClustalParser from "../src";
+import { parseString } from "../src";
 // This is a truncated version of the example in Tests/cw02.aln
 // Notice the inclusion of sequence numbers (right hand side)
 const example1 = `CLUSTAL W (1.81) multiple sequence alignment
@@ -139,7 +139,7 @@ AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 describe("alignio ported tests", () => {
   beforeEach(() => {});
   it("test one", () => {
-    const alignments = list(ClustalIterator(StringIO(example1)));
+    const alignments = parseString(example1);
     expect(alignments.length).toEqual(1);
     expect(alignments.version).toEqual("1.81");
     const alignment = alignments[0];
@@ -155,7 +155,7 @@ describe("alignio ported tests", () => {
     );
   });
   it("test two", () => {
-    alignments = list(ClustalIterator(StringIO(example2)));
+    alignments = parseString(example2);
     expect(alignments.length).toEqual(1);
     expect(alignments[0]._version).toEqual("1.83");
     alignment = alignments[0];
