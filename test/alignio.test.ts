@@ -1,7 +1,7 @@
-import ClustalParser from '../src'
+import ClustalParser from "../src";
 // This is a truncated version of the example in Tests/cw02.aln
 // Notice the inclusion of sequence numbers (right hand side)
-aln_example1 = `CLUSTAL W (1.81) multiple sequence alignment
+const example1 = `CLUSTAL W (1.81) multiple sequence alignment
 
 
 gi|4959044|gb|AAD34209.1|AF069      MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN 50
@@ -23,11 +23,11 @@ gi|671626|emb|CAA85685.1|           -EKDQCICYVAYPLDLFEEGSVTNMFTSIVGNVFGFKALRALRL
 gi|4959044|gb|AAD34209.1|AF069      VPTTRAQRRA 210
 gi|671626|emb|CAA85685.1|           VAYVKTFQGP 151
                                     *. .:: : .
-`
+`;
 // This example is a truncated version of the dataset used here:
 // http://virgil.ruc.dk/kurser/Sekvens/Treedraw.htm
 // with the last record repeated twice (deliberate toture test)
-aln_example2 = `CLUSTAL X (1.83) multiple sequence alignment
+const example2 = `CLUSTAL X (1.83) multiple sequence alignment
 
 
 V_Harveyi_PATH                 --MKNWIKVAVAAIA--LSAA------------------TVQAATEVKVG
@@ -63,9 +63,9 @@ HISJ_E_COLI                    LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV
 HISJ_E_COLI                    LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV
                                *.: . *        .  *     *:          :
 
-`
+`;
 
-aln_example3 = `CLUSTAL 2.0.9 multiple sequence alignment
+const example3 = `CLUSTAL 2.0.9 multiple sequence alignment
 
 
 Test1seq             ------------------------------------------------------------
@@ -127,62 +127,58 @@ Test1seq             GCTGGGGATGGAGAGGGAACAGAGTT-
 AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 AT3G20900.1-CDS      GCTGGGGATGGAGAGGGAACAGAGTAG
                      *************************
-`
+`;
 
-aln_example4 = `Kalign (2.0) alignment in ClustalW format
+const example4 = `Kalign (2.0) alignment in ClustalW format
 
 Test1seq             GCTGGGGATGGAGAGGGAACAGAGTT-
 AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 
-`
+`;
 
-describe('alignio ported tests', () => {
+describe("alignio ported tests", () => {
+  beforeEach(() => {});
+  it("test one", () => {
+    const alignments = list(ClustalIterator(StringIO(example1)));
+    expect(alignments.length).toEqual(1);
+    expect(alignments.version).toEqual("1.81");
+    const alignment = alignments[0];
+    expect(alignment.length).toEqual(2);
+    expect(alignment[0].id).toEqual("gi|4959044|gb|AAD34209.1|AF069");
+    expect(alignment[1].id).toEqual("gi|671626|emb|CAA85685.1|");
+    expect(alignment[0].seq).toEqual(
+      "MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN" +
+        "LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW" +
+        "LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT" +
+        "SENESEPSTRRLSVENMESSSQRQMENSASESASARPSRAERNSTEAVTE" +
+        "VPTTRAQRRA"
+    );
+  });
+  it("test two", () => {
+    alignments = list(ClustalIterator(StringIO(example2)));
+    expect(alignments.length).toEqual(1);
+    expect(alignments[0]._version).toEqual("1.83");
+    alignment = alignments[0];
+    expect(alignment.length).toEqual(9);
+    expect(alignment[-1].id).toEqual("HISJ_E_COLI");
+    expect(alignment[-1]).toEqual(
+      "MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG" +
+        "TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS" +
+        "LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV"
+    );
+  });
+  it("test_empy", () => {
+    expect(parseString("")).toEqual({});
+  });
 
-  beforeEach(() => {
-  })
-  it('test one', () => {
-    alignments = list(ClustalIterator(StringIO(aln_example1)))
-    self.assertEqual(1, alignments.length)
-    self.assertEqual(alignments[0]._version, '1.81')
-    alignment = alignments[0]
-    self.assertEqual(2, len(alignment))
-    self.assertEqual(alignment[0].id, 'gi|4959044|gb|AAD34209.1|AF069')
-    self.assertEqual(alignment[1].id, 'gi|671626|emb|CAA85685.1|')
-    self.assertEqual(
-      str(alignment[0].seq),
-      'MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN' +
-        'LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW' +
-        'LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT' +
-        'SENESEPSTRRLSVENMESSSQRQMENSASESASARPSRAERNSTEAVTE' +
-        'VPTTRAQRRA',
-    )
-  })
-  it('test two', () => {
-    alignments = list(ClustalIterator(StringIO(aln_example2)))
-    self.assertEqual(1, len(alignments))
-    self.assertEqual(alignments[0]._version, '1.83')
-    alignment = alignments[0]
-    self.assertEqual(9, len(alignment))
-    self.assertEqual(alignment[-1].id, 'HISJ_E_COLI')
-    self.assertEqual(
-      str(alignment[-1].seq),
-      'MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG' +
-        'TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS' +
-        'LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV',
-    )
-  })
-  it('test_empy', () => {
-    self.assertEqual(0, len(list(ClustalIterator(StringIO('')))))
-  })
+  it("test three", () => {
+    alignments = parseString(example3);
+    expect(alignments.length).toEqual(1);
+    expect(alignments.version).toEqual("2.0.9");
+  });
 
-  it('test three', () => {
-    alignments = list(ClustalIterator(StringIO(aln_example3)))
-    self.assertEqual(1, len(alignments))
-    self.assertEqual(alignments[0]._version, '2.0.9')
-  })
-
-  it('test kalign', () => {
-    alignments = next(ClustalIterator(StringIO(aln_example4)))
-    self.assertEqual(2, len(alignments))
-  })
-})
+  it("test kalign", () => {
+    alignments = parseString(example4);
+    expect(alignments.length).toEqual(2);
+  });
+});

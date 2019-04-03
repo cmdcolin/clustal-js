@@ -5,22 +5,29 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@babel/preset-typescript": "^7.3.3",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.0",
     "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.4.0",
+    "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-prettier": "^3.0.1",
     "jest": "^24.7.0",
     "jest-cli": "^24.7.0",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "ts-jest": "^24.0.1",
+    "typescript": "^3.4.1"
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint src test"
+    "lint": "eslint --ext .ts src test",
+    "build": "tsc && babel ./src --out-dir dist --extensions '.ts'"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
