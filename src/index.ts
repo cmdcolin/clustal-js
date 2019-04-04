@@ -8,52 +8,46 @@ interface Results {
   consensus: string;
   ids: string[];
 }
-export function parse(arr: Symbol.iterator): Results {
-  let line = arr.next().value;
-  assert(line !== undefined, "Empty file");
 
-  const knownHeaders = [
-    "CLUSTAL O",
-    "CLUSTAL W",
-    "CLUSTALW",
-    "CLUSTALO",
-    "CLUSTAL",
-    "PROBCONS",
-    "MUSCLE"
-  ];
-  const header = knownHeaders.find((l: string): boolean => line.startsWith(l));
-  const rest = line.slice(header.length);
-  if (header === undefined) {
-    throw new Error(
-      `${header} is not a known CLUSTAL header: ${knownHeaders.join(",")}`
-    );
-  }
 
-  let version;
-  const words = rest.split(/\s+/);
-  for (let word of words) {
-    if (word[0] === "(" && word[word.length - 1] === ")") {
-      word = word.substring(1, word.length - 1);
-    }
-    if ("0123456789".includes(word[0])) {
-      version = word;
-      break;
-    }
-  }
+export function seekFirstNonemptyLine(arr: Symbol.iterator): Results {
   // There should be two blank lines after the header line
-  line = arr.next().value;
+  let line = arr.next().value;
   while (line.trim() === "") {
     line = arr.next().value;
   }
+  return line
+}
+export function parse(arr: Symbol.iterator): Results {
+  let line = seekFirstNonemptyLine(arr)
+
+  assert(line !== undefined, "Empty file");
+  const header = line
+
+  const knownHeaders = [
+    "CLUSTAL",
+    "PROBCONS",
+    "MUSCLE",
+    "MSAPROBS",
+    "Kalign"
+  ];
+
+  if (!knownHeaders.find((l: string): boolean => line.startsWith(l))) {
+    console.warn(`${header} is not a known CLUSTAL header: ${knownHeaders.join(",")}, proceeding but could indicate an issue`)
+  }
+  line = seekFirstNonemptyLine(arr)
 
   const ids = [];
   const seqs = [];
   let consensus = "";
   let seqCols = null;
+  line = arr.next().value
+  console.log('wtf',line)
 
   // Use the first block to get the sequence identifiers
   while (line) {
     if (line[0] !== " " && line.trim() !== "") {
+      console.log(line)
       // Sequences identifier...
       const fields = line.trimEnd().split(/\s+/);
 
@@ -180,7 +174,8 @@ export function parse(arr: Symbol.iterator): Results {
       line = arr.next().value;
     }
   }
-  return { consensus, seqs, ids, header, version };
+  if(!consensus.trim().length) consensus = undefined
+  return { consensus, seqs, ids, header };
 
   // assert len(ids) == len(seqs)
   // if len(seqs) == 0 or len(seqs[0]) == 0:

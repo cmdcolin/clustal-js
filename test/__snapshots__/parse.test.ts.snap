@@ -2,8 +2,8 @@
 
 exports[`a large clustal 1`] = `
 Object {
-  "consensus": "",
-  "header": "CLUSTAL O",
+  "consensus": undefined,
+  "header": "CLUSTAL O(1.2.1) multiple sequence alignment",
   "ids": Array [
     "sp|Q9W678|P53_BARBU",
     "sp|Q29537|P53_CANFA",
@@ -76,14 +76,13 @@ Object {
     "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLPPPE",
     "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLAPPE",
   ],
-  "version": "1.2.1",
 }
 `;
 
 exports[`a smaller clustal 1`] = `
 Object {
   "consensus": "* *:  ::: : : *.*:. :.   *:*:***:* .:* :********:  ****::.**",
-  "header": "CLUSTAL O",
+  "header": "CLUSTAL O(1.2.4) multiple sequence alignment",
   "ids": Array [
     "sp|P69905|HBA_HUMAN",
     "sp|P01942|HBA_MOUSE",
@@ -94,6 +93,5 @@ Object {
     "MVLSGEDKSNIKAAWGKIGGHGAEYGAEALERMFASFPTTKTYFPHFDVSHGSAQVKGHG",
     "MSLTRTERTIILSLWSKISTQADVIGTETLERLFSCYPQAKTYFPHFDLHSGSAQLRAHG",
   ],
-  "version": "1.2.4",
 }
 `;

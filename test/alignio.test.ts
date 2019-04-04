@@ -139,10 +139,7 @@ AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 describe("alignio ported tests", () => {
   beforeEach(() => {});
   it("test one", () => {
-    const alignments = parseString(example1);
-    expect(alignments.length).toEqual(1);
-    expect(alignments.version).toEqual("1.81");
-    const alignment = alignments[0];
+    const alignment = parseString(example1);
     expect(alignment.length).toEqual(2);
     expect(alignment[0].id).toEqual("gi|4959044|gb|AAD34209.1|AF069");
     expect(alignment[1].id).toEqual("gi|671626|emb|CAA85685.1|");
@@ -155,10 +152,7 @@ describe("alignio ported tests", () => {
     );
   });
   it("test two", () => {
-    alignments = parseString(example2);
-    expect(alignments.length).toEqual(1);
-    expect(alignments[0]._version).toEqual("1.83");
-    alignment = alignments[0];
+    const alignment = parseString(example2);
     expect(alignment.length).toEqual(9);
     expect(alignment[-1].id).toEqual("HISJ_E_COLI");
     expect(alignment[-1]).toEqual(
@@ -172,13 +166,12 @@ describe("alignio ported tests", () => {
   });
 
   it("test three", () => {
-    alignments = parseString(example3);
-    expect(alignments.length).toEqual(1);
-    expect(alignments.version).toEqual("2.0.9");
+    const alignments = parseString(example3);
   });
 
   it("test kalign", () => {
-    alignments = parseString(example4);
+    const alignments = parseString(example4);
+    console.log(alignments,'wtf')
     expect(alignments.length).toEqual(2);
   });
 });
