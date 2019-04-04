@@ -1,4 +1,4 @@
-import assert from "assert";
+import { ok as assert } from "assert";
 import LocalFile from "./localFile";
 import { getFirstNonEmptyLine, parseVersion } from "./util";
 
@@ -16,7 +16,7 @@ interface Results {
   consensus?: string;
 }
 
-export function parse(arr: Symbol.iterator): Results {
+export function parse(arr: Iterator<string>): Results {
   let line = getFirstNonEmptyLine(arr);
   if (!line) throw new Error("Empty file received");
   const info = line;
