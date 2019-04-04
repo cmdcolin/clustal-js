@@ -162,7 +162,7 @@ describe("alignio ported tests", () => {
     );
   });
   it("test_empy", () => {
-    expect(parseString("")).toEqual({});
+    expect(parseString("")).toMatchSnapshot()
   });
 
   it("test three", () => {
@@ -171,7 +171,6 @@ describe("alignio ported tests", () => {
 
   it("test kalign", () => {
     const alignments = parseString(example4);
-    console.log(alignments,'wtf')
     expect(alignments.length).toEqual(2);
   });
 });

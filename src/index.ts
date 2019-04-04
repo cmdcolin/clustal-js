@@ -1,5 +1,6 @@
 import assert from "assert";
 import LocalFile from "./localFile";
+import { seekFirstNonemptyLine, parseVersion } from "./util";
 
 interface Results {
   version: string;
@@ -9,45 +10,33 @@ interface Results {
   ids: string[];
 }
 
-
-export function seekFirstNonemptyLine(arr: Symbol.iterator): Results {
-  // There should be two blank lines after the header line
-  let line = arr.next().value;
-  while (line.trim() === "") {
-    line = arr.next().value;
-  }
-  return line
-}
 export function parse(arr: Symbol.iterator): Results {
-  let line = seekFirstNonemptyLine(arr)
+  let line = seekFirstNonemptyLine(arr);
 
   assert(line !== undefined, "Empty file");
-  const header = line
+  const header = line;
 
-  const knownHeaders = [
-    "CLUSTAL",
-    "PROBCONS",
-    "MUSCLE",
-    "MSAPROBS",
-    "Kalign"
-  ];
+  const knownHeaders = ["CLUSTAL", "PROBCONS", "MUSCLE", "MSAPROBS", "Kalign"];
 
   if (!knownHeaders.find((l: string): boolean => line.startsWith(l))) {
-    console.warn(`${header} is not a known CLUSTAL header: ${knownHeaders.join(",")}, proceeding but could indicate an issue`)
+    console.warn(
+      `${header} is not a known CLUSTAL header: ${knownHeaders.join(
+        ","
+      )}, proceeding but could indicate an issue`
+    );
   }
-  line = seekFirstNonemptyLine(arr)
+  const version = parseVersion(line)
+  line = seekFirstNonemptyLine(arr);
 
   const ids = [];
   const seqs = [];
   let consensus = "";
   let seqCols = null;
-  line = arr.next().value
-  console.log('wtf',line)
+  line = arr.next().value;
 
   // Use the first block to get the sequence identifiers
   while (line) {
     if (line[0] !== " " && line.trim() !== "") {
-      console.log(line)
       // Sequences identifier...
       const fields = line.trimEnd().split(/\s+/);
 
@@ -174,8 +163,8 @@ export function parse(arr: Symbol.iterator): Results {
       line = arr.next().value;
     }
   }
-  if(!consensus.trim().length) consensus = undefined
-  return { consensus, seqs, ids, header };
+  if (!consensus.trim().length) consensus = undefined;
+  return { consensus, seqs, ids, header, version };
 
   // assert len(ids) == len(seqs)
   // if len(seqs) == 0 or len(seqs[0]) == 0:

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`alignio ported tests test_empy 1`] = `
+Object {
+  "consensus": undefined,
+  "header": "",
+  "ids": Array [],
+  "seqs": Array [],
+  "version": "",
+}
+`;

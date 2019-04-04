@@ -5,7 +5,6 @@ Object {
   "consensus": undefined,
   "header": "CLUSTAL O(1.2.1) multiple sequence alignment",
   "ids": Array [
-    "sp|Q9W678|P53_BARBU",
     "sp|Q29537|P53_CANFA",
     "sp|P67938|P53_BOSIN",
     "sp|P67939|P53_BOVIN",
@@ -41,7 +40,6 @@ Object {
     "sp|O57538|P53_XIPHE",
   ],
   "seqs": Array [
-    "-------------MAESQEFAELWERNL----IST-Q-------------EAGTCWELIN",
     "MEESQSELNIDP-PLSQETFSELWNLLPENNVLSSELC-PAV-DE-LLLPESVVNWLDE-",
     "MEESQAELNVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYT-DVATWLDE-",
     "MEESQAELNVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYT-DVATWLDE-",
@@ -76,6 +74,7 @@ Object {
     "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLPPPE",
     "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLAPPE",
   ],
+  "version": "1.2.1",
 }
 `;
 
@@ -84,14 +83,13 @@ Object {
   "consensus": "* *:  ::: : : *.*:. :.   *:*:***:* .:* :********:  ****::.**",
   "header": "CLUSTAL O(1.2.4) multiple sequence alignment",
   "ids": Array [
-    "sp|P69905|HBA_HUMAN",
     "sp|P01942|HBA_MOUSE",
     "sp|P13786|HBAZ_CAPHI",
   ],
   "seqs": Array [
-    "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG",
     "MVLSGEDKSNIKAAWGKIGGHGAEYGAEALERMFASFPTTKTYFPHFDVSHGSAQVKGHG",
     "MSLTRTERTIILSLWSKISTQADVIGTETLERLFSCYPQAKTYFPHFDLHSGSAQLRAHG",
   ],
+  "version": "1.2.4",
 }
 `;
