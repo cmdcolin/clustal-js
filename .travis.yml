@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - v6
+script:
+  - set -e
+  - yarn build
+  - yarn lint
+  - yarn test --coverage
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
