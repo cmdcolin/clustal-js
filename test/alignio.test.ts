@@ -156,7 +156,6 @@ describe("alignio ported tests", () => {
     );
   });
 
-
   it("test two", () => {
     const alignment = parseString(example2);
     expect(alignment.alns.length).toEqual(8);

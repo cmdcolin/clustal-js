@@ -2,7 +2,7 @@ export function parseVersion(line: string): string {
   const res = line.match(/\(?(\d+(\.\d+)+)\)?/);
   return res && res.length > 1 ? res[1] : "";
 }
-export function parseHeader(info) {
+export function parseHeader(info: string): Header {
   const knownHeaders = ["CLUSTAL", "PROBCONS", "MUSCLE", "MSAPROBS", "Kalign"];
 
   if (!knownHeaders.find((l: string): boolean => info.startsWith(l))) {
@@ -17,14 +17,14 @@ export function parseHeader(info) {
 }
 export function getFirstNonEmptyLine(arr: Iterator<string>): string {
   // There should be two blank lines after the header line
-  let line = arr.next().value;
-  while (line !== undefined && line.trim() === "") {
-    line = arr.next().value;
+  let line = arr.next();
+  while (!line.done && line.value.trim() === "") {
+    line = arr.next();
   }
-  return line;
+  return line.value;
 }
 
-export function getSeqBounds(line) {
+export function getSeqBounds(line: string): number[] {
   const fields = line.split(/\s+/);
   const temp = line.slice(fields[0].length);
   const s = fields[0].length + temp.indexOf(fields[1]);
@@ -33,7 +33,7 @@ export function getSeqBounds(line) {
 }
 
 // Use the first block to get the sequence identifiers
-export function parseBlock(arr) {
+export function parseBlock(arr: Iterator<string>): Block | undefined {
   let line = getFirstNonEmptyLine(arr);
   const block = [];
   let consensusLine = "";
@@ -48,28 +48,26 @@ export function parseBlock(arr) {
   const fields = block.map(s => s.split(/\s+/));
   const ids = fields.map(s => s[0]);
   const seqs = block.map(s => s.slice(start, end));
-  let consensus = consensusLine.slice(start, end)
+  let consensus = consensusLine.slice(start, end);
 
   // handle if the consensus trailing whitespace got trimmed
-  const remainder = seqs[0].length-consensus.length
-  if(remainder) {
-    consensus += " ".repeat(remainder)
+  const remainder = seqs[0].length - consensus.length;
+  if (remainder) {
+    consensus += " ".repeat(remainder);
   }
   return { ids, seqs, consensus };
 }
 
-export function parseBlocks(arr) {
-  let block = parseBlock(arr);
-  const res = block;
-  while (block) {
-    block = parseBlock(arr);
-    if (!block) {
-      break;
+export function parseBlocks(arr: Iterator<string>): Block | undefined {
+  let block;
+  let res = parseBlock(arr);
+  if (res !== undefined) {
+    while ((block = parseBlock(arr))) {
+      for (var i = 0; i < block.seqs.length; i++) {
+        res.seqs[i] += block.seqs[i];
+      }
+      res.consensus += block.consensus;
     }
-    for (var i = 0; i < block.seqs.length; i++) {
-      res.seqs[i] += block.seqs[i];
-    }
-    res.consensus += block.consensus;
   }
   return res;
 }

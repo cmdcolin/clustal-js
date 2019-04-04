@@ -43,3 +43,4 @@ Example output
          { info: 'CLUSTAL O(1.2.4) multiple sequence alignment',
            version: '1.2.4' } }
 ```
+

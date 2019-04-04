@@ -1,27 +1,6 @@
 import { ok as assert } from "assert";
 import LocalFile from "./localFile";
-import {
-  parseBlock,
-  parseBlocks,
-  parseHeader,
-  getFirstNonEmptyLine,
-  getSeqBounds,
-  parseVersion
-} from "./util";
-
-interface Header {
-  version: string;
-  info: string;
-}
-interface Alignment {
-  id: string;
-  seq: string;
-}
-interface Results {
-  header: Header;
-  alns: Alignment[];
-  consensus?: string;
-}
+import { parseBlocks, parseHeader, getFirstNonEmptyLine } from "./util";
 
 export function parse(arr: Iterator<string>): Results {
   let line = getFirstNonEmptyLine(arr);
@@ -29,13 +8,18 @@ export function parse(arr: Iterator<string>): Results {
   const header = parseHeader(line);
 
   const res = parseBlocks(arr);
+  if (res === undefined) throw new Error("No blocks parsed");
 
   const alns = res.seqs.map(
     (n, index): Alignment => ({ id: res.ids[index], seq: n })
   );
   const { consensus } = res;
-  if(consensus.length != alns[0].seq.length) {
-    throw new Error(`Consensus length != sequence length. Con ${consensus.length} seq ${alns[0].length}`)
+  if (consensus.length != alns[0].seq.length) {
+    throw new Error(
+      `Consensus length != sequence length. Con ${consensus.length} seq ${
+        alns[0].seq.length
+      }`
+    );
   }
 
   return { consensus, alns, header };
