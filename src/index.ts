@@ -16,6 +16,7 @@ interface Results {
   consensus?: string;
 }
 
+// this implementation is based on the BioPython AlignIO.Clustal code
 export function parse(arr: Iterator<string>): Results {
   let line = getFirstNonEmptyLine(arr);
   if (!line) throw new Error("Empty file received");
@@ -152,30 +153,9 @@ export function parse(arr: Iterator<string>): Results {
     line = getFirstNonEmptyLine(arr);
   }
   consensus = consensus.trim();
-  const alns = seqs.map((n, index) => ({ id: ids[index], seq: n }));
+  const alns = seqs.map((n, index): Alignment => ({ id: ids[index], seq: n }));
 
   return { consensus, alns, header: { info, version } };
-
-  // assert len(ids) == len(seqs)
-  // if len(seqs) == 0 or len(seqs[0]) == 0:
-  //     raise StopIteration
-
-  // if self.records_per_alignment is not None \
-  // and self.records_per_alignment != len(ids):
-  //     raise ValueError("Found %i records in this alignment, told to expect %i" \
-  //                      % (len(ids), self.records_per_alignment))
-
-  // records = (SeqRecord(Seq(s, self.alphabet), id=i, description=i) \
-  //            for (i,s) in zip(ids, seqs))
-  // alignment = MultipleSeqAlignment(records, self.alphabet)
-  // #TODO - Handle alignment annotation better, for now
-  // #mimic the old parser in Bio.Clustalw
-  // if version:
-  //     alignment._version = version
-  // if consensus:
-  //     alignment_length = len(seqs[0])
-  //     assert len(consensus) == alignment_length, \
-  //            "Alignment length is %i, consensus length is %i, '%s'" \
 }
 export function parseString(contents: string): Results {
   const iter = contents.split("\n")[Symbol.iterator]();
