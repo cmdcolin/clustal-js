@@ -27,16 +27,19 @@ sp|P13786|HBAZ_CAPHI      DAHAAWDKFLSIVSGVLTEKYR        142
 Example output
 
 ```
-    { consensus:
-       '* *:  ::: : : *.*:. :.   *:*:***:* .:* :********:  ****::.**',
-      seqs:
-       [ 'MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG',
-         'MVLSGEDKSNIKAAWGKIGGHGAEYGAEALERMFASFPTTKTYFPHFDVSHGSAQVKGHG',
-         'MSLTRTERTIILSLWSKISTQADVIGTETLERLFSCYPQAKTYFPHFDLHSGSAQLRAHG' ],
-      ids:
-       [ 'sp|P69905|HBA_HUMAN',
-         'sp|P01942|HBA_MOUSE',
-         'sp|P13786|HBAZ_CAPHI' ],
-      header: 'CLUSTAL O',
-      version: '1.2.4' }
+      { consensus:
+         '* *:  ::: : : *.*:. :.   *:*:***:* .:* :********:  ****::.**.**. *: .*.  :*:: .*** **:***: *********:**********:* **:** .**: ****: ** ***.***',
+        alns:
+         [ { id: 'sp|P69905|HBA_HUMAN',
+             seq:
+              'MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLLSHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR' },
+           { id: 'sp|P01942|HBA_MOUSE',
+             seq:
+              'MVLSGEDKSNIKAAWGKIGGHGAEYGAEALERMFASFPTTKTYFPHFDVSHGSAQVKGHGKKVADALASAAGHLDDLPGALSALSDLHAHKLRVDPVNFKLLSHCLLVTLASHHPADFTPAVHASLDKFLASVSTVLTSKYR' },
+           { id: 'sp|P13786|HBAZ_CAPHI',
+             seq:
+              'MSLTRTERTIILSLWSKISTQADVIGTETLERLFSCYPQAKTYFPHFDLHSGSAQLRAHGSKVVAAVGDAVKSIDNVTSALSKLSELHAYVLRVDPVNFKFLSHCLLVTLASHFPADFTADAHAAWDKFLSIVSGVLTEKYR' } ],
+        header:
+         { info: 'CLUSTAL O(1.2.4) multiple sequence alignment',
+           version: '1.2.4' } }
 ```
