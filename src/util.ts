@@ -3,7 +3,7 @@ export function parseVersion(line: string): string {
   return res && res.length > 1 ? res[1] : "";
 }
 
-export function seekFirstNonemptyLine(arr: Symbol.iterator): Results {
+export function getFirstNonEmptyLine(arr: Symbol.iterator): Results {
   // There should be two blank lines after the header line
   let line = arr.next().value;
   while (line !== undefined && line.trim() === "") {

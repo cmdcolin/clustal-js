@@ -1,6 +1,6 @@
 import assert from "assert";
 import LocalFile from "./localFile";
-import { seekFirstNonemptyLine, parseVersion } from "./util";
+import { getFirstNonEmptyLine, parseVersion } from "./util";
 
 interface Results {
   version: string;
@@ -11,7 +11,7 @@ interface Results {
 }
 
 export function parse(arr: Symbol.iterator): Results {
-  let line = seekFirstNonemptyLine(arr);
+  let line = getFirstNonEmptyLine(arr);
   if (!line) return {};
   const info = line;
 
@@ -25,7 +25,7 @@ export function parse(arr: Symbol.iterator): Results {
     );
   }
   const version = parseVersion(line);
-  line = seekFirstNonemptyLine(arr);
+  line = getFirstNonEmptyLine(arr);
 
   const ids = [];
   const seqs = [];
@@ -59,12 +59,12 @@ export function parse(arr: Symbol.iterator): Results {
         // This MAY be an old style file with a letter count...
         const letters = parseInt(fields[2], 10);
         if (Number.isNaN(letters))
-          throw new Error(
+          console.warn(
             `Could not parse line, bad sequence number:\n${line}`
           );
         if (fields[1].replace(/-/g,'').length !== letters)
-          throw new Error(
-            `Could not parse line, invalid sequence number:\n${line} ${fields[0]} ${fields[1].replace('-',"").length} ${letters}`
+          console.warn(
+            `Could not parse line, invalid sequence number:\n${line}`
           );
       }
     } else if (line[0] === " ") {
@@ -91,22 +91,9 @@ export function parse(arr: Symbol.iterator): Results {
   // Confirm all same length
   for (const s of seqs) assert(s.length === seqs[0].length);
   if (consensus) assert(consensus.length === seqs[0].length);
+  line = getFirstNonEmptyLine(arr)
 
-  const done = false;
-  while (!done) {
-    // There should be a blank line between each block.
-    // Also want to ignore any consensus line from the
-    // previous block.
-    while (line && line.trim() === "") {
-      line = arr.next().value;
-    }
-    if (!line) break; // end of file
-
-    // if (knownHeaders.includes(line.split(/\s+/, 1)[0])) {
-    //   // Found concatenated alignment.
-    //   done = true
-    //   break
-    // }
+  while (line) {
     for (let i = 0; i < ids.length; i += 1) {
       assert(line[0] !== " ", `Unexpected line:\n${line}`);
       const fields = line.trimEnd().split(/\s+/);
@@ -139,12 +126,12 @@ export function parse(arr: Symbol.iterator): Results {
         // This MAY be an old style file with a letter count...
         const letters = parseInt(fields[2], 10);
         if (Number.isNaN(letters)) {
-          throw new Error(
+          console.warn(
             `Could not parse line, bad sequence number:\n${line}`
           );
         }
-        if (seqs[i].replace("-", "").length !== letters) {
-          throw new Error(
+        if (seqs[i].replace(/-/g, "").length !== letters) {
+          console.warn(
             `Could not parse line, invalid sequence number:\n${line}`
           );
         }
@@ -155,13 +142,13 @@ export function parse(arr: Symbol.iterator): Results {
     if (consensus) {
       assert(line[0] === " ");
       assert(seqCols !== null);
-      consensus += line[seqCols];
+      consensus += line.slice(seqCols[0],seqCols[1])
       // assert len(consensus) == len(seqs[0])
       // assert not line[:seqCols.start].strip()
       // assert not line[seqCols.stop:].strip()
       // Read in the next line
-      line = arr.next().value;
     }
+    line = getFirstNonEmptyLine(arr)
   }
   if (!consensus.trim().length) consensus = undefined;
   const alns = seqs.map((n, index) => ({ id: ids[index], seq: n }));
