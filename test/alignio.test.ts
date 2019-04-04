@@ -142,7 +142,6 @@ AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 `;
 
 describe("alignio ported tests", () => {
-  beforeEach(() => {});
   it("test one", () => {
     const alignment = parseString(example1);
     expect(alignment.alns.length).toEqual(2);
@@ -159,7 +158,7 @@ describe("alignio ported tests", () => {
 
   it("test duplicate error", async () => {
     function throwsError() {
-      parseString(example2Dup)
+      parseString(example2Dup);
     }
     expect(throwsError).toThrowError(/duplicate/);
   });
@@ -175,11 +174,15 @@ describe("alignio ported tests", () => {
     );
   });
   it("test_empy", () => {
-    expect(parseString("")).toMatchSnapshot();
+    function throwsError() {
+      parseString("");
+    }
+    expect(throwsError).toThrowError(/Empty/);
   });
 
   it("test three", () => {
     const alignments = parseString(example3);
+    expect(alignments).toMatchSnapshot();
   });
 
   it("test kalign", () => {
