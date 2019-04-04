@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/cmdcolin/clustal-js.svg?branch=master)](https://travis-ci.com/cmdcolin/clustal-js)
+
 # clustal-js
 
 This parses clustal output format
