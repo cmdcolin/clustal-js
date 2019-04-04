@@ -156,12 +156,6 @@ describe("alignio ported tests", () => {
     );
   });
 
-  it("test duplicate error", async () => {
-    function throwsError() {
-      parseString(example2Dup);
-    }
-    expect(throwsError).toThrowError(/duplicate/);
-  });
 
   it("test two", () => {
     const alignment = parseString(example2);

@@ -1,4 +1,4 @@
-import { parseVersion } from "../src/util";
+import { parseVersion,parseBlock } from "../src/util";
 test("versions", () => {
   expect(parseVersion("CLUSTAL (1.2.3)")).toEqual("1.2.3");
   expect(parseVersion("CLUSTALW (1.2.3)")).toEqual("1.2.3");
@@ -12,3 +12,58 @@ test("versions", () => {
     parseVersion("CLUSTAL format alignment by MAFFT FFT-NS-i (v7.397)")
   ).toEqual("7.397");
 });
+
+test('block', () => {
+  const b = `sp|P69905|HBA_HUMAN       MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG	60
+                          * *:  ::: : : *.*:. :.   *:*:***:* .:* :********:  ****::.**
+
+`
+  const iter = b.split("\n")[Symbol.iterator]();
+  const ret = parseBlock(iter)
+  const {consensus,seqs} = ret
+  expect(consensus.length).toEqual(60)
+  expect(seqs[0].length).toEqual(60)
+})
+test('end block', () => {
+const b = `sp|P69905|HBA_HUMAN       AVHASLDKFLASVSTVLTSKYR	142
+                           .**: ****: ** ***.***
+`
+  const iter = b.split("\n")[Symbol.iterator]();
+  const ret = parseBlock(iter)
+  const {consensus,seqs} = ret
+  expect(consensus.length).toEqual(22)
+  expect(seqs[0].length).toEqual(22)
+})
+test('empty consensus with trimmed line', () => {
+const b = `sp|P69905|HBA_HUMAN       AVHASLDKFLASVSTVLTSKYR	142
+
+`
+  const iter = b.split("\n")[Symbol.iterator]();
+  const ret = parseBlock(iter)
+  const {consensus,seqs} = ret
+  expect(consensus.length).toEqual(22)
+  expect(seqs[0].length).toEqual(22)
+})
+test('empty consensus with spaces', () => {
+const b = `sp|P69905|HBA_HUMAN       AVHASLDKFLASVSTVLTSKYR	142
+
+`
+  const iter = b.split("\n")[Symbol.iterator]();
+  const ret = parseBlock(iter)
+  const {consensus,seqs} = ret
+  expect(consensus.length).toEqual(22)
+  expect(seqs[0].length).toEqual(22)
+})
+
+test('consensus line had trailing whitespace clipped', () => {
+const b = `sp|P69905|HBA_HUMAN       AVHASLDKFLASVSTVLTSKYR	142
+sp|P01942|HBA_MOUSE       AVHASLDKFLASVSTVLTSKYR	142
+sp|P13786|HBAZ_CAPHI      DAHAAWDKFLSIVSGVLTEKYR	142
+                           .**: ****: ** ***.
+`
+  const iter = b.split("\n")[Symbol.iterator]();
+  const ret = parseBlock(iter)
+  const {consensus,seqs} = ret
+  expect(consensus.length).toEqual(22)
+  expect(seqs[0].length).toEqual(22)
+})
