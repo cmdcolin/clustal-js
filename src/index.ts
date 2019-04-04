@@ -43,7 +43,7 @@ export function parse(arr: Iterator<string>): Results {
   while (line) {
     if (line[0] !== " " && line.trim() !== "") {
       // Sequences identifier...
-      const fields = line.trimEnd().split(/\s+/);
+      const fields = line.trim().split(/\s+/);
 
       // We expect there to be two fields, there can be an optional
       // "sequence number" field containing the letter count.
@@ -100,7 +100,7 @@ export function parse(arr: Iterator<string>): Results {
   while (line) {
     for (let i = 0; i < ids.length; i += 1) {
       assert(line[0] !== " ", `Unexpected line:\n${line}`);
-      const fields = line.trimEnd().split(/\s+/);
+      const fields = line.trim().split(/\s+/);
 
       // We expect there to be two fields, there can be an optional
       // "sequence number" field containing the letter count.

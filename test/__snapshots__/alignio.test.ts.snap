@@ -23,5 +23,3 @@ Object {
   },
 }
 `;
-
-exports[`alignio ported tests test_empy 1`] = `Object {}`;
