@@ -12,7 +12,7 @@ interface Results {
 
 export function parse(arr: Symbol.iterator): Results {
   let line = seekFirstNonemptyLine(arr);
-  if(!line) return {}
+  if (!line) return {};
   const info = line;
 
   const knownHeaders = ["CLUSTAL", "PROBCONS", "MUSCLE", "MSAPROBS", "Kalign"];
@@ -24,9 +24,8 @@ export function parse(arr: Symbol.iterator): Results {
       )}, proceeding but could indicate an issue`
     );
   }
-  const version = parseVersion(line)
+  const version = parseVersion(line);
   line = seekFirstNonemptyLine(arr);
-
 
   const ids = [];
   const seqs = [];
@@ -44,6 +43,8 @@ export function parse(arr: Symbol.iterator): Results {
       if (fields.length < 2 || fields.length > 3)
         throw new Error(`Could not parse line:\n${line}`);
 
+      if (ids.includes(fields[0]))
+        throw new Error("duplicate ID detected: " + fields[0]);
       ids.push(fields[0]);
       seqs.push(fields[1]);
 
@@ -61,9 +62,9 @@ export function parse(arr: Symbol.iterator): Results {
           throw new Error(
             `Could not parse line, bad sequence number:\n${line}`
           );
-        if (fields[1].replace("-", "").length !== letters)
+        if (fields[1].replace(/-/g,'').length !== letters)
           throw new Error(
-            `Could not parse line, invalid sequence number:\n${line}`
+            `Could not parse line, invalid sequence number:\n${line} ${fields[0]} ${fields[1].replace('-',"").length} ${letters}`
           );
       }
     } else if (line[0] === " ") {
@@ -163,8 +164,7 @@ export function parse(arr: Symbol.iterator): Results {
     }
   }
   if (!consensus.trim().length) consensus = undefined;
-  const alns = seqs.map((n, index) => ({id:ids[index], seq: n}))
-
+  const alns = seqs.map((n, index) => ({ id: ids[index], seq: n }));
 
   return { consensus, alns, header: { info, version } };
 
