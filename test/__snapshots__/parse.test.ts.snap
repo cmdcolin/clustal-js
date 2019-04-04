@@ -2,94 +2,172 @@
 
 exports[`a large clustal 1`] = `
 Object {
+  "alns": Array [
+    Object {
+      "id": "sp|Q9W678|P53_BARBU",
+      "seq": "-------------MAESQEFAELWERNL----IST-Q-------------EAGTCWELIN",
+    },
+    Object {
+      "id": "sp|Q29537|P53_CANFA",
+      "seq": "MEESQSELNIDP-PLSQETFSELWNLLPENNVLSSELC-PAV-DE-LLLPESVVNWLDE-",
+    },
+    Object {
+      "id": "sp|P67938|P53_BOSIN",
+      "seq": "MEESQAELNVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYT-DVATWLDE-",
+    },
+    Object {
+      "id": "sp|P67939|P53_BOVIN",
+      "seq": "MEESQAELNVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYT-DVATWLDE-",
+    },
+    Object {
+      "id": "sp|P10360|P53_CHICK",
+      "seq": "MAE-----EMEPLLEPTEVFMDLWSMLPY-------------SMQQLPLPEDHSNWQELS",
+    },
+    Object {
+      "id": "sp|Q9WUR6|P53_CAVPO",
+      "seq": "MEEPHSDLSIEP-PLSQETFSDLWKLLPENNVLSDSLS-PPM-DHLLLSPEEVASWLGEN",
+    },
+    Object {
+      "id": "sp|P13481|P53_CHLAE",
+      "seq": "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
+    },
+    Object {
+      "id": "sp|O09185|P53_CRIGR",
+      "seq": "MEEPQSDLSIEL-PLSQETFSDLWKLLPPNNVLSTLPS-SDSIEE-LFLSENVTGWLEDS",
+    },
+    Object {
+      "id": "sp|P79734|P53_DANRE",
+      "seq": "-----------MAQNDSQEFAELWEKNL----IIQPP-------------GGGSCWDIIN",
+    },
+    Object {
+      "id": "sp|Q8SPZ3|P53_DELLE",
+      "seq": "MEESQAELGVEP-PLSQETFSDLWKLLPENNLLSSELS-PA-VDDLLLSPEDVANWLDE-",
+    },
+    Object {
+      "id": "sp|Q29480|P53_EQUAS",
+      "seq": "------------------------------------------------------------",
+    },
+    Object {
+      "id": "sp|P41685|P53_FELCA",
+      "seq": "MQEPPLELTIEP-PLSQETFSELWNLLPENNVLSSELS-SAM--NELPLSEDVANWLDE-",
+    },
+    Object {
+      "id": "sp|P79892|P53_HORSE",
+      "seq": "---------------------------------------PAV-NN-LLLSPDVVNWLDE-",
+    },
+    Object {
+      "id": "sp|P04637|P53_HUMAN",
+      "seq": "MEEPQSDPSVEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-MDDLMLSPDDIEQWFTED",
+    },
+    Object {
+      "id": "sp|O93379|P53_ICTPU",
+      "seq": "MEGNGERDTMMVEPPDSQEFAELWLRN--------------------LIVRDNSLWGKEE",
+    },
+    Object {
+      "id": "sp|P56423|P53_MACFA",
+      "seq": "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
+    },
+    Object {
+      "id": "sp|P61260|P53_MACFU",
+      "seq": "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
+    },
+    Object {
+      "id": "sp|P56424|P53_MACMU",
+      "seq": "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
+    },
+    Object {
+      "id": "sp|O36006|P53_MARMO",
+      "seq": "MEEAQSDLSIEP-PLSQETFSDLWNLLPENNVLSPVLS-PPM-DDLLLSSEDVENWFDK-",
+    },
+    Object {
+      "id": "sp|Q00366|P53_MESAU",
+      "seq": "MEEPQSDLSIEL-PLSQETFSDLWKLLPPNNVLSTLPS-SDSIEE-LFLSENVAGWLEDP",
+    },
+    Object {
+      "id": "sp|P02340|P53_MOUSE",
+      "seq": "MEESQSDISLEL-PLSQETFSGLWKLLPPEDILPS-----PHCMDDLLLPQDVEEFFEG-",
+    },
+    Object {
+      "id": "sp|P25035|P53_ONCMY",
+      "seq": "MADLAEN---VSLPLSQESFEDLWKMNLNLVAV---------------QPPETESWVGYD",
+    },
+    Object {
+      "id": "sp|P79820|P53_ORYLA",
+      "seq": "------MDPVPDLPESQGSFQELWETVSYPPLETL---------SLPTVNEPTGSWVATG",
+    },
+    Object {
+      "id": "sp|O12946|P53_PLAFE",
+      "seq": "MMDEQGLDGMQILPGSQDSFSELWASVQTPSIATI---------AEEF------------",
+    },
+    Object {
+      "id": "sp|Q9TUB2|P53_PIG",
+      "seq": "MEESQSELGVEP-PLSQETFSDLWKLLPENNLLSSELS-LAAVNDLLLSP--VTNWLDE-",
+    },
+    Object {
+      "id": "sp|Q95330|P53_RABIT",
+      "seq": "MEESQSDLSLEP-PLSQETFSDLWKLLPENNLLTTSLN-PPV--DDLLSAEDVANWLNE-",
+    },
+    Object {
+      "id": "sp|P10361|P53_RAT",
+      "seq": "MEDSQSDMSIEL-PLSQETFSCLWKLLPPDDILPTTATGSPNSMEDLFLPQDVAELLEG-",
+    },
+    Object {
+      "id": "sp|P51664|P53_SHEEP",
+      "seq": "MEESQAELGVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYSEDVVTWLDE-",
+    },
+    Object {
+      "id": "sp|Q9W679|P53_TETMU",
+      "seq": "-ME----EENISLPLSQDTFQDLWDNVSAPPISTI---------QTAAL--ENEAWPAER",
+    },
+    Object {
+      "id": "sp|Q64662|P53_SPEBE",
+      "seq": "---------------------DLWNLLPENNVLSPVLS-PPM-DDLLLSSEDVENWFDK-",
+    },
+    Object {
+      "id": "sp|Q9TTA1|P53_TUPBE",
+      "seq": "MEEPQSDPSVEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-MDDLMLSPDDIEQWFTED",
+    },
+    Object {
+      "id": "sp|P07193|P53_XENLA",
+      "seq": "-MEPSSETGMDP-PLSQETFEDLWSLLPDPLQTVTCR------------LDNLSEFPDY-",
+    },
+    Object {
+      "id": "sp|Q92143|P53_XIPMA",
+      "seq": "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLPPPE",
+    },
+    Object {
+      "id": "sp|O57538|P53_XIPHE",
+      "seq": "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLAPPE",
+    },
+  ],
   "consensus": undefined,
-  "header": "CLUSTAL O(1.2.1) multiple sequence alignment",
-  "ids": Array [
-    "sp|Q29537|P53_CANFA",
-    "sp|P67938|P53_BOSIN",
-    "sp|P67939|P53_BOVIN",
-    "sp|P10360|P53_CHICK",
-    "sp|Q9WUR6|P53_CAVPO",
-    "sp|P13481|P53_CHLAE",
-    "sp|O09185|P53_CRIGR",
-    "sp|P79734|P53_DANRE",
-    "sp|Q8SPZ3|P53_DELLE",
-    "sp|Q29480|P53_EQUAS",
-    "sp|P41685|P53_FELCA",
-    "sp|P79892|P53_HORSE",
-    "sp|P04637|P53_HUMAN",
-    "sp|O93379|P53_ICTPU",
-    "sp|P56423|P53_MACFA",
-    "sp|P61260|P53_MACFU",
-    "sp|P56424|P53_MACMU",
-    "sp|O36006|P53_MARMO",
-    "sp|Q00366|P53_MESAU",
-    "sp|P02340|P53_MOUSE",
-    "sp|P25035|P53_ONCMY",
-    "sp|P79820|P53_ORYLA",
-    "sp|O12946|P53_PLAFE",
-    "sp|Q9TUB2|P53_PIG",
-    "sp|Q95330|P53_RABIT",
-    "sp|P10361|P53_RAT",
-    "sp|P51664|P53_SHEEP",
-    "sp|Q9W679|P53_TETMU",
-    "sp|Q64662|P53_SPEBE",
-    "sp|Q9TTA1|P53_TUPBE",
-    "sp|P07193|P53_XENLA",
-    "sp|Q92143|P53_XIPMA",
-    "sp|O57538|P53_XIPHE",
-  ],
-  "seqs": Array [
-    "MEESQSELNIDP-PLSQETFSELWNLLPENNVLSSELC-PAV-DE-LLLPESVVNWLDE-",
-    "MEESQAELNVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYT-DVATWLDE-",
-    "MEESQAELNVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYT-DVATWLDE-",
-    "MAE-----EMEPLLEPTEVFMDLWSMLPY-------------SMQQLPLPEDHSNWQELS",
-    "MEEPHSDLSIEP-PLSQETFSDLWKLLPENNVLSDSLS-PPM-DHLLLSPEEVASWLGEN",
-    "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
-    "MEEPQSDLSIEL-PLSQETFSDLWKLLPPNNVLSTLPS-SDSIEE-LFLSENVTGWLEDS",
-    "-----------MAQNDSQEFAELWEKNL----IIQPP-------------GGGSCWDIIN",
-    "MEESQAELGVEP-PLSQETFSDLWKLLPENNLLSSELS-PA-VDDLLLSPEDVANWLDE-",
-    "------------------------------------------------------------",
-    "MQEPPLELTIEP-PLSQETFSELWNLLPENNVLSSELS-SAM--NELPLSEDVANWLDE-",
-    "---------------------------------------PAV-NN-LLLSPDVVNWLDE-",
-    "MEEPQSDPSVEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-MDDLMLSPDDIEQWFTED",
-    "MEGNGERDTMMVEPPDSQEFAELWLRN--------------------LIVRDNSLWGKEE",
-    "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
-    "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
-    "MEEPQSDPSIEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-VDDLMLSPDDLAQWLTED",
-    "MEEAQSDLSIEP-PLSQETFSDLWNLLPENNVLSPVLS-PPM-DDLLLSSEDVENWFDK-",
-    "MEEPQSDLSIEL-PLSQETFSDLWKLLPPNNVLSTLPS-SDSIEE-LFLSENVAGWLEDP",
-    "MEESQSDISLEL-PLSQETFSGLWKLLPPEDILPS-----PHCMDDLLLPQDVEEFFEG-",
-    "MADLAEN---VSLPLSQESFEDLWKMNLNLVAV---------------QPPETESWVGYD",
-    "------MDPVPDLPESQGSFQELWETVSYPPLETL---------SLPTVNEPTGSWVATG",
-    "MMDEQGLDGMQILPGSQDSFSELWASVQTPSIATI---------AEEF------------",
-    "MEESQSELGVEP-PLSQETFSDLWKLLPENNLLSSELS-LAAVNDLLLSP--VTNWLDE-",
-    "MEESQSDLSLEP-PLSQETFSDLWKLLPENNLLTTSLN-PPV--DDLLSAEDVANWLNE-",
-    "MEDSQSDMSIEL-PLSQETFSCLWKLLPPDDILPTTATGSPNSMEDLFLPQDVAELLEG-",
-    "MEESQAELGVEP-PLSQETFSDLWNLLPENNLLSSELS-AP-VDDLLPYSEDVVTWLDE-",
-    "-ME----EENISLPLSQDTFQDLWDNVSAPPISTI---------QTAAL--ENEAWPAER",
-    "---------------------DLWNLLPENNVLSPVLS-PPM-DDLLLSSEDVENWFDK-",
-    "MEEPQSDPSVEP-PLSQETFSDLWKLLPENNVLSPLPS-QA-MDDLMLSPDDIEQWFTED",
-    "-MEPSSETGMDP-PLSQETFEDLWSLLPDPLQTVTCR------------LDNLSEFPDY-",
-    "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLPPPE",
-    "-ME----EADLTLPLSQDTFHDLWNNVFLSTEN--------------------ESLAPPE",
-  ],
-  "version": "1.2.1",
+  "header": Object {
+    "info": "CLUSTAL O(1.2.1) multiple sequence alignment",
+    "version": "1.2.1",
+  },
 }
 `;
 
 exports[`a smaller clustal 1`] = `
 Object {
+  "alns": Array [
+    Object {
+      "id": "sp|P69905|HBA_HUMAN",
+      "seq": "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG",
+    },
+    Object {
+      "id": "sp|P01942|HBA_MOUSE",
+      "seq": "MVLSGEDKSNIKAAWGKIGGHGAEYGAEALERMFASFPTTKTYFPHFDVSHGSAQVKGHG",
+    },
+    Object {
+      "id": "sp|P13786|HBAZ_CAPHI",
+      "seq": "MSLTRTERTIILSLWSKISTQADVIGTETLERLFSCYPQAKTYFPHFDLHSGSAQLRAHG",
+    },
+  ],
   "consensus": "* *:  ::: : : *.*:. :.   *:*:***:* .:* :********:  ****::.**",
-  "header": "CLUSTAL O(1.2.4) multiple sequence alignment",
-  "ids": Array [
-    "sp|P01942|HBA_MOUSE",
-    "sp|P13786|HBAZ_CAPHI",
-  ],
-  "seqs": Array [
-    "MVLSGEDKSNIKAAWGKIGGHGAEYGAEALERMFASFPTTKTYFPHFDVSHGSAQVKGHG",
-    "MSLTRTERTIILSLWSKISTQADVIGTETLERLFSCYPQAKTYFPHFDLHSGSAQLRAHG",
-  ],
-  "version": "1.2.4",
+  "header": Object {
+    "info": "CLUSTAL O(1.2.4) multiple sequence alignment",
+    "version": "1.2.4",
+  },
 }
 `;

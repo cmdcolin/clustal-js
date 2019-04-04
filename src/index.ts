@@ -12,15 +12,14 @@ interface Results {
 
 export function parse(arr: Symbol.iterator): Results {
   let line = seekFirstNonemptyLine(arr);
-
-  assert(line !== undefined, "Empty file");
-  const header = line;
+  if(!line) return {}
+  const info = line;
 
   const knownHeaders = ["CLUSTAL", "PROBCONS", "MUSCLE", "MSAPROBS", "Kalign"];
 
   if (!knownHeaders.find((l: string): boolean => line.startsWith(l))) {
     console.warn(
-      `${header} is not a known CLUSTAL header: ${knownHeaders.join(
+      `${info} is not a known CLUSTAL header: ${knownHeaders.join(
         ","
       )}, proceeding but could indicate an issue`
     );
@@ -28,11 +27,11 @@ export function parse(arr: Symbol.iterator): Results {
   const version = parseVersion(line)
   line = seekFirstNonemptyLine(arr);
 
+
   const ids = [];
   const seqs = [];
   let consensus = "";
   let seqCols = null;
-  line = arr.next().value;
 
   // Use the first block to get the sequence identifiers
   while (line) {
@@ -164,7 +163,10 @@ export function parse(arr: Symbol.iterator): Results {
     }
   }
   if (!consensus.trim().length) consensus = undefined;
-  return { consensus, seqs, ids, header, version };
+  const alns = seqs.map((n, index) => ({id:ids[index], seq: n}))
+
+
+  return { consensus, alns, header: { info, version } };
 
   // assert len(ids) == len(seqs)
   // if len(seqs) == 0 or len(seqs[0]) == 0:

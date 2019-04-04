@@ -140,10 +140,10 @@ describe("alignio ported tests", () => {
   beforeEach(() => {});
   it("test one", () => {
     const alignment = parseString(example1);
-    expect(alignment.length).toEqual(2);
-    expect(alignment[0].id).toEqual("gi|4959044|gb|AAD34209.1|AF069");
-    expect(alignment[1].id).toEqual("gi|671626|emb|CAA85685.1|");
-    expect(alignment[0].seq).toEqual(
+    expect(alignment.alns.length).toEqual(2);
+    expect(alignment.alns[0].id).toEqual("gi|4959044|gb|AAD34209.1|AF069");
+    expect(alignment.alns[1].id).toEqual("gi|671626|emb|CAA85685.1|");
+    expect(alignment.alns[0].seq).toEqual(
       "MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN" +
         "LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW" +
         "LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT" +
@@ -153,9 +153,9 @@ describe("alignio ported tests", () => {
   });
   it("test two", () => {
     const alignment = parseString(example2);
-    expect(alignment.length).toEqual(9);
-    expect(alignment[-1].id).toEqual("HISJ_E_COLI");
-    expect(alignment[-1]).toEqual(
+    expect(alignment.alns.length).toEqual(9);
+    expect(alignment.alns[alignment.alns.length-1].id).toEqual("HISJ_E_COLI");
+    expect(alignment.alns[alignment.alns.length-1].seq).toEqual(
       "MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG" +
         "TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS" +
         "LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV"
@@ -171,6 +171,6 @@ describe("alignio ported tests", () => {
 
   it("test kalign", () => {
     const alignments = parseString(example4);
-    expect(alignments.length).toEqual(2);
+    expect(alignments.alns.length).toEqual(2);
   });
 });
