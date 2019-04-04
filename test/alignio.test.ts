@@ -1,4 +1,7 @@
 import { parseString } from "../src";
+
+// these tests derived from biopython alignIO clustal tests
+
 // This is a truncated version of the example in Tests/cw02.aln
 // Notice the inclusion of sequence numbers (right hand side)
 const example1 = `CLUSTAL W (1.81) multiple sequence alignment
@@ -34,7 +37,7 @@ HISJ_E_COLI                    MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRI
 
 // This example is a truncated version of the dataset used here:
 // http://virgil.ruc.dk/kurser/Sekvens/Treedraw.htm
-// with the last record repeated twice (deliberate toture test)
+// with the last record repeated twice
 const example2 = `CLUSTAL X (1.83) multiple sequence alignment
 
 
@@ -46,6 +49,7 @@ FLIY_ECOLI                     MKLAHLGRQALMGVMAVALVAG---MSVKSFADEG-LLNKVKERGTLLV
 E_coli_GlnH                    --MKSVLKVSLAALTLAFAVS------------------SHAADKKLVVA
 Deinococcus_radiodurans        -MKKSLLSLKLSGLLVPSVLALS--------LSACSSPSSTLNQGTLKIA
 HISJ_E_COLI                    MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG
+HISJ_E_COLI                    MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG
                                          : .                                 : :.
 
 V_Harveyi_PATH                 MSGRYFPFTFVKQ--DKLQGFEVDMWDEIGKRNDYKIEYVTANFSGLFGL
@@ -56,6 +60,7 @@ FLIY_ECOLI                     LEGTYPPFSFQGD-DGKLTGFEVEFAQQLAKHLGVEASLKPTKWDGMLA
 E_coli_GlnH                    TDTAFVPFEFKQG--DKYVGFDVDLWAAIAKELKLDYELKPMDFSGIIPA
 Deinococcus_radiodurans        MEGTYPPFTSKNE-QGELVGFDVDIAKAVAQKLNLKPEFVLTEWSGILAG
 HISJ_E_COLI                    TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS
+HISJ_E_COLI                    TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS
                                      **       .:  *::::.   : :.   .        ..:
 
 V_Harveyi_PATH                 LETGRIDTISNQITMTDARKAKYLFADPYVVDG-AQI
@@ -65,6 +70,7 @@ YA80_HAEIN                     LNAKRFDVIANQTNPSPERLKKYSFTTPYNYSG-GVI
 FLIY_ECOLI                     LDSKRIDVVINQVTISDERKKKYDFSTPYTISGIQAL
 E_coli_GlnH                    LQTKNVDLALAGITITDERKKAIDFSDGYYKSG-LLV
 Deinococcus_radiodurans        LQANKYDVIVNQVGITPERQNSIGFSQPYAYSRPEII
+HISJ_E_COLI                    LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV
 HISJ_E_COLI                    LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV
                                *.: . *        .  *     *:          :
 
@@ -158,7 +164,7 @@ describe("alignio ported tests", () => {
 
   it("test two", () => {
     const alignment = parseString(example2);
-    expect(alignment.alns.length).toEqual(8);
+    expect(alignment.alns.length).toEqual(9);
     expect(alignment.alns[alignment.alns.length - 1].id).toEqual("HISJ_E_COLI");
     expect(alignment.alns[alignment.alns.length - 1].seq).toEqual(
       "MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG" +
