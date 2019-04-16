@@ -34,6 +34,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.3",
-    "es6-promisify": "^6.0.1"
+    "generic-filehandle": "^1.0.6"
   }
 }

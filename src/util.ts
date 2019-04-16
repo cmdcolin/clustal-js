@@ -45,7 +45,7 @@ export function parseBlock(arr: Iterator<string>): Block | undefined {
     line = arr.next().value;
   }
   const [start, end] = getSeqBounds(block[0]);
-  const fields = block.map(s => s.split(/\s+/));
+  const fields = block.map((s: string): string[] => s.split(/\s+/));
   const ids = fields.map(s => s[0]);
   const seqs = block.map(s => s.slice(start, end));
   let consensus = consensusLine.slice(start, end);

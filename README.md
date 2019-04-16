@@ -5,6 +5,12 @@
 This parses clustal output format
 
 
+## Usage
+
+```js
+const p = parseFile('test.txt')
+```
+
 Example input
 
 ```

@@ -1,5 +1,5 @@
 import { ok as assert } from "assert";
-import LocalFile from "./localFile";
+import { LocalFile } from "generic-filehandle";
 import { parseBlocks, parseHeader, getFirstNonEmptyLine } from "./util";
 
 export function parse(arr: Iterator<string>): Results {

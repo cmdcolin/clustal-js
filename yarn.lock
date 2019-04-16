@@ -1511,6 +1511,14 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+cross-fetch@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.2.tgz#b7136491967031949c7f86b15903aef4fa3f1768"
+  integrity sha512-a4Z0EJ5Nck6QtMy9ZqloLfpvu2uMV3sBfMCR+CgSBCZc6z5KR4bfEiD3dkepH8iZgJMXQpTqf8FjMmvu/GMFkg==
+  dependencies:
+    node-fetch "2.3.0"
+    whatwg-fetch "3.0.0"
+
 cross-spawn@^6.0.0, cross-spawn@^6.0.5:
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
@@ -2175,6 +2183,15 @@ gauge@~2.7.3:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
+
+generic-filehandle@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/generic-filehandle/-/generic-filehandle-1.0.6.tgz#88ad90b020f0f6c53444fe63aade2ac1e004eed4"
+  integrity sha512-gT8cf7AxrEO+NECz5eXI/wov1fWL60esIzyB5LrLoNSBvwlheSCLB208lEPq6Tb9MTW+L2Ogkw+bSQ3He+bZUw==
+  dependencies:
+    "@babel/runtime" "^7.4.3"
+    cross-fetch "^3.0.2"
+    es6-promisify "^6.0.1"
 
 get-caller-file@^1.0.1:
   version "1.0.3"
@@ -3489,6 +3506,11 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+
+node-fetch@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+  integrity sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -4938,6 +4960,11 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   integrity sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
   dependencies:
     iconv-lite "0.4.24"
+
+whatwg-fetch@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
+  integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
 
 whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0:
   version "2.3.0"
