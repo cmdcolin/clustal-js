@@ -1,8 +1,7 @@
 import { ok as assert } from "assert";
-import { LocalFile } from "generic-filehandle";
 import { parseBlocks, parseHeader, getFirstNonEmptyLine } from "./util";
 
-export function parse(arr: Iterator<string>): Results {
+export function parseIter(arr: Iterator<string>): Results {
   let line = getFirstNonEmptyLine(arr);
   if (!line) throw new Error("Empty file received");
   const header = parseHeader(line);
@@ -25,13 +24,7 @@ export function parse(arr: Iterator<string>): Results {
   return { consensus, alns, header };
 }
 
-export function parseString(contents: string): Results {
+export function parse(contents: string): Results {
   const iter = contents.split("\n")[Symbol.iterator]();
-  return parse(iter);
-}
-
-export async function parseFile(filename: string): Promise<Results> {
-  const f = new LocalFile(filename);
-  const contents = await f.readFile();
-  return parseString(contents.toString());
+  return parseIter(iter);
 }

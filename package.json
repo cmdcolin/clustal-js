@@ -33,7 +33,6 @@
     "build": "tsc && babel ./src --out-dir dist --extensions '.ts'"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.3",
-    "generic-filehandle": "^1.0.6"
+    "@babel/runtime": "^7.4.3"
   }
 }

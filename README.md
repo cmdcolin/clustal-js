@@ -8,10 +8,14 @@ This parses clustal output format
 ## Usage
 
 ```js
-const p = parseFile('test.txt')
+import {parse} from '@gmod/clustal'
+const file = fs.readFileSync('test.aln', 'utf8')
+const ret = parse(file)
 ```
 
-Example input
+## Example
+
+Input
 
 ```
 CLUSTAL O(1.2.4) multiple sequence alignment
@@ -33,7 +37,7 @@ sp|P13786|HBAZ_CAPHI      DAHAAWDKFLSIVSGVLTEKYR	142
                            .**: ****: ** ***.***
 ```
 
-Example output
+Output
 
 ```
       { consensus:

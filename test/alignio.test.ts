@@ -1,4 +1,4 @@
-import { parseString } from "../src";
+import { parse } from "../src";
 
 // these tests derived from biopython alignIO clustal tests
 
@@ -149,7 +149,7 @@ AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 
 describe("alignio ported tests", () => {
   it("test one", () => {
-    const alignment = parseString(example1);
+    const alignment = parse(example1);
     expect(alignment.alns.length).toEqual(2);
     expect(alignment.alns[0].id).toEqual("gi|4959044|gb|AAD34209.1|AF069");
     expect(alignment.alns[1].id).toEqual("gi|671626|emb|CAA85685.1|");
@@ -163,7 +163,7 @@ describe("alignio ported tests", () => {
   });
 
   it("test two", () => {
-    const alignment = parseString(example2);
+    const alignment = parse(example2);
     expect(alignment.alns.length).toEqual(9);
     expect(alignment.alns[alignment.alns.length - 1].id).toEqual("HISJ_E_COLI");
     expect(alignment.alns[alignment.alns.length - 1].seq).toEqual(
@@ -174,18 +174,18 @@ describe("alignio ported tests", () => {
   });
   it("test_empy", () => {
     function throwsError() {
-      parseString("");
+      parse("");
     }
     expect(throwsError).toThrowError(/Empty/);
   });
 
   it("test three", () => {
-    const alignments = parseString(example3);
+    const alignments = parse(example3);
     expect(alignments).toMatchSnapshot();
   });
 
   it("test kalign", () => {
-    const alignments = parseString(example4);
+    const alignments = parse(example4);
     expect(alignments.alns.length).toEqual(2);
   });
 });

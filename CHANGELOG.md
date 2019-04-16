@@ -1,0 +1,1 @@
+- Initial version parses .aln CLUSTAL files
