@@ -1,8 +1,7 @@
-import { ok as assert } from "assert";
 import { parseBlocks, parseHeader, getFirstNonEmptyLine } from "./util";
 
 export function parseIter(arr: Iterator<string>): Results {
-  let line = getFirstNonEmptyLine(arr);
+  const line = getFirstNonEmptyLine(arr);
   if (!line) throw new Error("Empty file received");
   const header = parseHeader(line);
 
@@ -15,9 +14,7 @@ export function parseIter(arr: Iterator<string>): Results {
   const { consensus } = res;
   if (consensus.length != alns[0].seq.length) {
     throw new Error(
-      `Consensus length != sequence length. Con ${consensus.length} seq ${
-        alns[0].seq.length
-      }`
+      `Consensus length != sequence length. Con ${consensus.length} seq ${alns[0].seq.length}`
     );
   }
 

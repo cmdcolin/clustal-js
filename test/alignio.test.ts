@@ -28,13 +28,6 @@ gi|671626|emb|CAA85685.1|           VAYVKTFQGP 151
                                     *. .:: : .
 `;
 
-const example2Dup = `CLUSTAL X (1.83) multiple sequence alignment
-
-
-HISJ_E_COLI                    MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG
-HISJ_E_COLI                    MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG
-`;
-
 // This example is a truncated version of the dataset used here:
 // http://virgil.ruc.dk/kurser/Sekvens/Treedraw.htm
 // with the last record repeated twice

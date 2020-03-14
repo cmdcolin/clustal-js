@@ -60,10 +60,10 @@ export function parseBlock(arr: Iterator<string>): Block | undefined {
 
 export function parseBlocks(arr: Iterator<string>): Block | undefined {
   let block;
-  let res = parseBlock(arr);
+  const res = parseBlock(arr);
   if (res !== undefined) {
     while ((block = parseBlock(arr))) {
-      for (var i = 0; i < block.seqs.length; i++) {
+      for (let i = 0; i < block.seqs.length; i++) {
         res.seqs[i] += block.seqs[i];
       }
       res.consensus += block.consensus;
