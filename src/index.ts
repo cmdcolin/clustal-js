@@ -1,4 +1,5 @@
 import { parseBlocks, parseHeader, getFirstNonEmptyLine } from "./util";
+import { Results, Alignment } from "./types";
 
 export function parseIter(arr: Iterator<string>): Results {
   const line = getFirstNonEmptyLine(arr);

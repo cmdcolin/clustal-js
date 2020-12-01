@@ -1,18 +1,18 @@
-declare interface Header {
+export interface Header {
   version: string;
   info: string;
 }
-declare interface Alignment {
+export interface Alignment {
   id: string;
   seq: string;
 }
 
-declare interface Block {
+export interface Block {
   consensus: string;
   seqs: string[];
   ids: string[];
 }
-declare interface Results {
+export interface Results {
   header: Header;
   alns: Alignment[];
   consensus: string;

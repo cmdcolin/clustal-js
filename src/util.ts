@@ -1,3 +1,5 @@
+import { Header, Block } from "./types";
+
 export function parseVersion(line: string): string {
   const res = line.match(/\(?(\d+(\.\d+)+)\)?/);
   return res && res.length > 1 ? res[1] : "";
@@ -46,8 +48,8 @@ export function parseBlock(arr: Iterator<string>): Block | undefined {
   }
   const [start, end] = getSeqBounds(block[0]);
   const fields = block.map((s: string): string[] => s.split(/\s+/));
-  const ids = fields.map(s => s[0]);
-  const seqs = block.map(s => s.slice(start, end));
+  const ids = fields.map((s) => s[0]);
+  const seqs = block.map((s) => s.slice(start, end));
   let consensus = consensusLine.slice(start, end);
 
   // handle if the consensus trailing whitespace got trimmed
