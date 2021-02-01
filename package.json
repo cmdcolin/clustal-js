@@ -30,7 +30,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint --ext .ts src test",
-    "build": "tsc && babel ./src --out-dir dist --extensions '.ts'"
+    "build": "tsc"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5"
