@@ -12,3 +12,10 @@ test("a smaller clustal", async () => {
   const res = await parse(ret);
   expect(res).toMatchSnapshot();
 });
+
+test("a larger clustal", async () => {
+  const ret = fs.readFileSync(require.resolve("./data/out.aln"), "utf8");
+  const res = await parse(ret);
+  fs.writeFileSync("out.txt", JSON.stringify(res.alns))
+  expect(res).toMatchSnapshot();
+});
