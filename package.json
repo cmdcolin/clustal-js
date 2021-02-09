@@ -30,9 +30,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint --ext .ts src test",
-    "build": "tsc"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.12.5"
+    "build": "tsc",
+    "postversion": "git push --follow-tags"
   }
 }
