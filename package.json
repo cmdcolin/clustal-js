@@ -2,6 +2,9 @@
   "name": "clustal-js",
   "version": "1.0.1",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.12.10",

@@ -1,3 +1,7 @@
+## v1.0.2
+
+- Add dist folder to package.json
+
 ## v1.0.1
 
 Remove unused dependency on @babel/runtime
