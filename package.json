@@ -2,6 +2,7 @@
   "name": "clustal-js",
   "version": "1.0.2",
   "main": "dist/index.js",
+  "repository": "cmdcolin/clustal-js",
   "files": [
     "dist"
   ],
