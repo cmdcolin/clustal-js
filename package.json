@@ -4,7 +4,9 @@
   "main": "dist/index.js",
   "repository": "cmdcolin/clustal-js",
   "files": [
-    "dist"
+    "dist",
+    "esm",
+    "src"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -25,7 +27,8 @@
     "clean": "rimraf dist",
     "test": "jest",
     "lint": "eslint --ext .ts src test",
-    "build": "tsc",
+    "build:esm": "tsc --target es2018 --outDir esm",
+    "build:es5": "tsc --target es2015 --module commonjs --outDir dist",
     "prebuild": "npm run clean",
     "preversion": "npm run lint && npm test && npm run build",
     "postversion": "git push --follow-tags"
