@@ -1,4 +1,9 @@
-import { parseBlocks, parseHeader, getFirstNonEmptyLine } from './util'
+import {
+  parseBlocks,
+  parseHeader,
+  getFirstNonEmptyLine,
+  parsePairwiseBlocks,
+} from './util'
 
 export function parseClustalIter(arr: Iterator<string>) {
   const line = getFirstNonEmptyLine(arr)
@@ -24,7 +29,7 @@ export function parseClustalIter(arr: Iterator<string>) {
 }
 
 export function parsePairwiseIter(arr: string) {
-  const res = parseBlocks(arr.split('\n')[Symbol.iterator]())
+  const res = parsePairwiseBlocks(arr.split('\n')[Symbol.iterator]())
   if (res === undefined) {
     throw new Error('No blocks parsed')
   }

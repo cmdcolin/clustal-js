@@ -158,8 +158,8 @@ describe('alignio ported tests', () => {
   it('test two', () => {
     const alignment = parse(example2)
     expect(alignment.alns.length).toEqual(9)
-    expect(alignment.alns.at(-1).id).toEqual('HISJ_E_COLI')
-    expect(alignment.alns.at(-1).seq).toEqual(
+    expect(alignment.alns.at(-1)?.id).toEqual('HISJ_E_COLI')
+    expect(alignment.alns.at(-1)?.seq).toEqual(
       'MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG' +
         'TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS' +
         'LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV',

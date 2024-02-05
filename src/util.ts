@@ -54,7 +54,38 @@ export function parseBlock(arr: Iterator<string>) {
   const [start, end] = getSeqBounds(block[0])
   const fields = block.map(s => s.split(/\s+/))
   const ids = fields.map(s => s[0])
-  const seqs = fields.map(s => s[2].trim())
+  const seqs = block.map(s => s.slice(start, end))
+  let consensus = consensusLine.slice(start, end)
+
+  // handle if the consensus trailing whitespace got trimmed
+  const remainder = seqs[0].length - consensus.length
+  if (remainder) {
+    consensus += ' '.repeat(remainder)
+  }
+  return { ids, seqs, consensus }
+}
+
+// Use the first block to get the sequence identifiers
+export function parsePairwiseBlock(arr: Iterator<string>) {
+  let line = getFirstNonEmptyLine(arr)
+  const block = []
+  let consensusLine = ''
+  if (!line) {
+    return undefined
+  }
+
+  while (line) {
+    if (line[0] !== ' ') {
+      block.push(line)
+    } else {
+      consensusLine = line
+    }
+    line = arr.next().value
+  }
+  const [start, end] = getSeqBounds(block[0])
+  const fields = block.map(s => s.split(/\s+/))
+  const ids = fields.map(s => s[0])
+  const seqs = fields.map(s => s[2])
   let consensus = consensusLine.slice(start, end)
 
   // handle if the consensus trailing whitespace got trimmed
@@ -70,6 +101,20 @@ export function parseBlocks(arr: Iterator<string>) {
   const res = parseBlock(arr)
   if (res !== undefined) {
     while ((block = parseBlock(arr))) {
+      for (let i = 0; i < block.seqs.length; i++) {
+        res.seqs[i] += block.seqs[i]
+      }
+      res.consensus += block.consensus
+    }
+  }
+  return res
+}
+
+export function parsePairwiseBlocks(arr: Iterator<string>) {
+  let block
+  const res = parsePairwiseBlock(arr)
+  if (res !== undefined) {
+    while ((block = parsePairwiseBlock(arr))) {
       for (let i = 0; i < block.seqs.length; i++) {
         res.seqs[i] += block.seqs[i]
       }
