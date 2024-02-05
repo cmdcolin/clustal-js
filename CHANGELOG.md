@@ -2,7 +2,6 @@
 
 - Add generated typescript declarations to output
 
-
 ## v1.0.2
 
 - Add dist folder to package.json

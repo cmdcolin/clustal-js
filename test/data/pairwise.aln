@@ -1,0 +1,86 @@
+########################################
+# Program: needle
+# Rundate: Mon  5 Feb 2024 17:52:19
+# Commandline: needle
+#    -auto
+#    -stdout
+#    -asequence emboss_needle-R20240205-175207-0261-70863964-p1m.asequence
+#    -bsequence emboss_needle-R20240205-175207-0261-70863964-p1m.bsequence
+# Align_format: srspair
+# Report_file: stdout
+########################################
+
+#=======================================
+#
+# Aligned_sequences: 2
+# 1: a
+# 2: b
+# Matrix: EBLOSUM62
+# Gap_penalty: 10.0
+# Extend_penalty: 0.5
+#
+# Length: 614
+# Identity:     221/614 (36.0%)
+# Similarity:   221/614 (36.0%)
+# Gaps:         393/614 (64.0%)
+# Score: 1114.0
+# 
+#
+#=======================================
+
+a                  1 MGQKGHKDSLYPCGGTPESSLHEALDQCMTALDLFLTNQFSEALSYLKPR     50
+                                                                       
+b                  0 --------------------------------------------------      0
+
+a                 51 TKESMYHSLTYATILEMQAMMTFDPQDILLAGNMMKEAQMLCQRHRRKSS    100
+                                                                       
+b                  0 --------------------------------------------------      0
+
+a                101 VTDSFSSLVNRPTLGQFTEEEIHAEVCYAECLLQRAALTFLQGSSHGGAV    150
+                                                                       
+b                  0 --------------------------------------------------      0
+
+a                151 RPRALHDPSHACSCPPGPGRQHLFLLQDENMVSFIKGGIKVRNSYQTYKE    200
+                                                                       
+b                  0 --------------------------------------------------      0
+
+a                201 LDSLVQSSQYCKGENHPHFEGGVKLGVGAFNLTLSMLPTRILRLLEFVGF    250
+                                                                       
+b                  0 --------------------------------------------------      0
+
+a                251 SGNKDYGLLQLEEGASGHSFRSVLCVMLLLCYHTFLTFVLGTGNVNIEEA    300
+                                                                       
+b                  0 --------------------------------------------------      0
+
+a                301 EKLLKPYLNRYPKGAIFLFFAGRIEVIKGNIDAAIRRFEECCEAQQHWKQ    350
+                                                                       
+b                  0 --------------------------------------------------      0
+
+a                351 FHHMCYWELMWCFTYKGQWKMSYFYADLLSKENCWSKATYIYMKAAYLSM    400
+                                                               ||||||||
+b                  1 ------------------------------------------MKAAYLSM      8
+
+a                401 FGKEDHKPFGDDEVELFRAVPGLKLKIAGKSLPTEKFAIRKSRRYFSSNP    450
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+b                  9 FGKEDHKPFGDDEVELFRAVPGLKLKIAGKSLPTEKFAIRKSRRYFSSNP     58
+
+a                451 ISLPVPALEMMYIWNGYAVIGKQPKLTDGILEIITKAEEMLEKGPENEYS    500
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+b                 59 ISLPVPALEMMYIWNGYAVIGKQPKLTDGILEIITKAEEMLEKGPENEYS    108
+
+a                501 VDDECLVKLLKGLCLKYLGRVQEAEENFRSISANEKKIKYDHYLIPNALL    550
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+b                109 VDDECLVKLLKGLCLKYLGRVQEAEENFRSISANEKKIKYDHYLIPNALL    158
+
+a                551 ELALLLMEQDRNEEAIKLLESAKQNYKNYSMESRTHFRIQAATLQAKSSL    600
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+b                159 ELALLLMEQDRNEEAIKLLESAKQNYKNYSMESRTHFRIQAATLQAKSSL    208
+
+a                601 ENSSRSMVSSVSL-    613
+                     ||||||||||||| 
+b                209 ENSSRSMVSSVSL*    222
+
+
+#---------------------------------------
+#---------------------------------------
+

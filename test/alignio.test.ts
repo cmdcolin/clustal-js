@@ -151,7 +151,7 @@ describe("alignio ported tests", () => {
         "LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW" +
         "LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT" +
         "SENESEPSTRRLSVENMESSSQRQMENSASESASARPSRAERNSTEAVTE" +
-        "VPTTRAQRRA"
+        "VPTTRAQRRA",
     );
   });
 
@@ -162,7 +162,7 @@ describe("alignio ported tests", () => {
     expect(alignment.alns[alignment.alns.length - 1].seq).toEqual(
       "MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG" +
         "TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS" +
-        "LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV"
+        "LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV",
     );
   });
   it("test_empy", () => {

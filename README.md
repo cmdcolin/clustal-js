@@ -4,13 +4,12 @@
 
 This parses clustal output format
 
-
 ## Usage
 
 ```js
-import {parse} from 'clustal-js'
-const file = fs.readFileSync('test.aln', 'utf8')
-const ret = parse(file)
+import { parse } from "clustal-js";
+const file = fs.readFileSync("test.aln", "utf8");
+const ret = parse(file);
 ```
 
 ## Example
@@ -56,7 +55,6 @@ Output
          { info: 'CLUSTAL O(1.2.4) multiple sequence alignment',
            version: '1.2.4' } }
 ```
-
 
 ### Notes
 
