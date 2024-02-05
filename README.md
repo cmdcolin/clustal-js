@@ -8,7 +8,7 @@ This parses clustal output format
 ## Usage
 
 ```js
-import {parse} from '@gmod/clustal'
+import {parse} from 'clustal-js'
 const file = fs.readFileSync('test.aln', 'utf8')
 const ret = parse(file)
 ```
