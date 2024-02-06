@@ -22,9 +22,12 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
+    "clean": "rimraf dist",
     "test": "jest",
     "lint": "eslint --ext .ts src test",
     "build": "tsc",
+    "prebuild": "npm run clean",
+    "preversion": "npm run lint && npm test && npm run build",
     "postversion": "git push --follow-tags"
   }
 }

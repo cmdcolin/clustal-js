@@ -1,3 +1,7 @@
+# v2.0.1
+
+- Fix preversion build script
+
 # v2.0.0
 
 - Parse pairwise format, outputted by e.g. EMBOSS needle, etc
