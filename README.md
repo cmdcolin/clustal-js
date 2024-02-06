@@ -64,10 +64,9 @@ const file = fs.readFileSync('test.aln', 'utf8')
 const ret = parse(file)
 ```
 
-Input
+Input test.aln (e.g. from EMBOSS needle)
 
 ```
-
 ########################################
 # Program: needle
 # Rundate: Mon  5 Feb 2024 17:52:19

@@ -1,3 +1,11 @@
+# v2.0.0
+
+- Parse pairwise format, outputted by e.g. EMBOSS needle, etc
+
+# v1.0.4
+
+- Fix package name in README
+
 # v1.0.3
 
 - Add generated typescript declarations to output
