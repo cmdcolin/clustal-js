@@ -1,4 +1,4 @@
-import { parse } from "../src";
+import { parse } from '../src'
 
 // these tests derived from biopython alignIO clustal tests
 
@@ -26,7 +26,7 @@ gi|671626|emb|CAA85685.1|           -EKDQCICYVAYPLDLFEEGSVTNMFTSIVGNVFGFKALRALRL
 gi|4959044|gb|AAD34209.1|AF069      VPTTRAQRRA 210
 gi|671626|emb|CAA85685.1|           VAYVKTFQGP 151
                                     *. .:: : .
-`;
+`
 
 // This example is a truncated version of the dataset used here:
 // http://virgil.ruc.dk/kurser/Sekvens/Treedraw.htm
@@ -67,7 +67,7 @@ HISJ_E_COLI                    LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV
 HISJ_E_COLI                    LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV
                                *.: . *        .  *     *:          :
 
-`;
+`
 
 const example3 = `CLUSTAL 2.0.9 multiple sequence alignment
 
@@ -131,54 +131,54 @@ Test1seq             GCTGGGGATGGAGAGGGAACAGAGTT-
 AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 AT3G20900.1-CDS      GCTGGGGATGGAGAGGGAACAGAGTAG
                      *************************
-`;
+`
 
 const example4 = `Kalign (2.0) alignment in ClustalW format
 
 Test1seq             GCTGGGGATGGAGAGGGAACAGAGTT-
 AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 
-`;
+`
 
-describe("alignio ported tests", () => {
-  it("test one", () => {
-    const alignment = parse(example1);
-    expect(alignment.alns.length).toEqual(2);
-    expect(alignment.alns[0].id).toEqual("gi|4959044|gb|AAD34209.1|AF069");
-    expect(alignment.alns[1].id).toEqual("gi|671626|emb|CAA85685.1|");
+describe('alignio ported tests', () => {
+  it('test one', () => {
+    const alignment = parse(example1)
+    expect(alignment.alns.length).toEqual(2)
+    expect(alignment.alns[0].id).toEqual('gi|4959044|gb|AAD34209.1|AF069')
+    expect(alignment.alns[1].id).toEqual('gi|671626|emb|CAA85685.1|')
     expect(alignment.alns[0].seq).toEqual(
-      "MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN" +
-        "LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW" +
-        "LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT" +
-        "SENESEPSTRRLSVENMESSSQRQMENSASESASARPSRAERNSTEAVTE" +
-        "VPTTRAQRRA"
-    );
-  });
+      'MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN' +
+        'LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW' +
+        'LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT' +
+        'SENESEPSTRRLSVENMESSSQRQMENSASESASARPSRAERNSTEAVTE' +
+        'VPTTRAQRRA',
+    )
+  })
 
-  it("test two", () => {
-    const alignment = parse(example2);
-    expect(alignment.alns.length).toEqual(9);
-    expect(alignment.alns[alignment.alns.length - 1].id).toEqual("HISJ_E_COLI");
-    expect(alignment.alns[alignment.alns.length - 1].seq).toEqual(
-      "MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG" +
-        "TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS" +
-        "LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV"
-    );
-  });
-  it("test_empy", () => {
+  it('test two', () => {
+    const alignment = parse(example2)
+    expect(alignment.alns.length).toEqual(9)
+    expect(alignment.alns.at(-1)?.id).toEqual('HISJ_E_COLI')
+    expect(alignment.alns.at(-1)?.seq).toEqual(
+      'MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG' +
+        'TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS' +
+        'LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV',
+    )
+  })
+  it('test_empy', () => {
     function throwsError() {
-      parse("");
+      parse('')
     }
-    expect(throwsError).toThrowError(/Empty/);
-  });
+    expect(throwsError).toThrowError(/Empty/)
+  })
 
-  it("test three", () => {
-    const alignments = parse(example3);
-    expect(alignments).toMatchSnapshot();
-  });
+  it('test three', () => {
+    const alignments = parse(example3)
+    expect(alignments).toMatchSnapshot()
+  })
 
-  it("test kalign", () => {
-    const alignments = parse(example4);
-    expect(alignments.alns.length).toEqual(2);
-  });
-});
+  it('test kalign', () => {
+    const alignments = parse(example4)
+    expect(alignments.alns.length).toEqual(2)
+  })
+})

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pairwise 1`] = `
+{
+  "alns": [
+    {
+      "id": "a",
+      "seq": "MGQKGHKDSLYPCGGTPESSLHEALDQCMTALDLFLTNQFSEALSYLKPRTKESMYHSLTYATILEMQAMMTFDPQDILLAGNMMKEAQMLCQRHRRKSSVTDSFSSLVNRPTLGQFTEEEIHAEVCYAECLLQRAALTFLQGSSHGGAVRPRALHDPSHACSCPPGPGRQHLFLLQDENMVSFIKGGIKVRNSYQTYKELDSLVQSSQYCKGENHPHFEGGVKLGVGAFNLTLSMLPTRILRLLEFVGFSGNKDYGLLQLEEGASGHSFRSVLCVMLLLCYHTFLTFVLGTGNVNIEEAEKLLKPYLNRYPKGAIFLFFAGRIEVIKGNIDAAIRRFEECCEAQQHWKQFHHMCYWELMWCFTYKGQWKMSYFYADLLSKENCWSKATYIYMKAAYLSMFGKEDHKPFGDDEVELFRAVPGLKLKIAGKSLPTEKFAIRKSRRYFSSNPISLPVPALEMMYIWNGYAVIGKQPKLTDGILEIITKAEEMLEKGPENEYSVDDECLVKLLKGLCLKYLGRVQEAEENFRSISANEKKIKYDHYLIPNALLELALLLMEQDRNEEAIKLLESAKQNYKNYSMESRTHFRIQAATLQAKSSLENSSRSMVSSVSL-",
+    },
+    {
+      "id": "b",
+      "seq": "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------MKAAYLSMFGKEDHKPFGDDEVELFRAVPGLKLKIAGKSLPTEKFAIRKSRRYFSSNPISLPVPALEMMYIWNGYAVIGKQPKLTDGILEIITKAEEMLEKGPENEYSVDDECLVKLLKGLCLKYLGRVQEAEENFRSISANEKKIKYDHYLIPNALLELALLLMEQDRNEEAIKLLESAKQNYKNYSMESRTHFRIQAATLQAKSSLENSSRSMVSSVSL*",
+    },
+  ],
+  "consensus": "                                                                                                                                                                                                                                                                                                                                                                                                        ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| ",
+}
+`;
