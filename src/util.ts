@@ -16,7 +16,7 @@ export function parseHeader(info: string) {
   return { info, version }
 }
 
-export function getFirstNonEmptyLine(arr: Iterator<string>) {
+export function getFirstNonEmptyLine(arr: Iterator<string>): string {
   // There should be two blank lines after the header line
   let line = arr.next()
   while (!line.done && line.value.trim() === '') {
@@ -43,7 +43,7 @@ export function parseBlock(arr: Iterator<string>) {
   }
 
   while (line) {
-    if (line[0] !== ' ') {
+    if (!line[0].startsWith(' ')) {
       block.push(line)
     } else {
       consensusLine = line
