@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.com/cmdcolin/clustal-js.svg?branch=master)](https://travis-ci.com/cmdcolin/clustal-js)
+[![NPM version](https://img.shields.io/npm/v/@gmod/bam.svg?style=flat-square)](https://npmjs.org/package/@gmod/bam)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/cmdcolin/clustal-js/push.yml?branch=master)](https://github.com/cmdcolin/clustal-js/actions?query=branch%3Amaster+workflow%3APush+)
 
 # clustal-js
 

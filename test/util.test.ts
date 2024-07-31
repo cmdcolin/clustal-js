@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import { parseVersion, parseBlock } from '../src/util'
 test('versions', () => {
   expect(parseVersion('CLUSTAL (1.2.3)')).toEqual('1.2.3')
