@@ -19,7 +19,7 @@ export function parsePairwiseBlock(arr: Iterator<string>) {
   }
 
   while (line) {
-    if (line[0] !== ' ') {
+    if (!line.startsWith(' ')) {
       block.push(line)
     } else {
       consensusLine = line
