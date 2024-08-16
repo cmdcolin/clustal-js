@@ -24,6 +24,10 @@ export function parseClustalIter(arr: Iterator<string>) {
   return { consensus, alns, header }
 }
 
+interface Row {
+  id: string
+  seq: string
+}
 export function parsePairwiseIter(arr: string) {
   const res = parsePairwiseBlocks(arr.split('\n')[Symbol.iterator]())
   if (res === undefined) {
@@ -37,8 +41,13 @@ export function parsePairwiseIter(arr: string) {
       `Consensus length != sequence length. Con ${consensus.length} seq ${alns[0].seq.length}`,
     )
   }
-
-  return { consensus, alns }
+  if (alns.length !== 2) {
+    throw new Error('More than two sequences in pairwise alignment')
+  }
+  return {
+    consensus,
+    alns: alns as [Row, Row],
+  }
 }
 
 export function parse(contents: string) {
@@ -47,9 +56,10 @@ export function parse(contents: string) {
 }
 
 export function parsePairwise(contents: string) {
-  const res = contents
-    .split('\n')
-    .filter(f => !f.startsWith('#'))
-    .join('\n')
-  return parsePairwiseIter(res)
+  return parsePairwiseIter(
+    contents
+      .split('\n')
+      .filter(f => !f.startsWith('#'))
+      .join('\n'),
+  )
 }

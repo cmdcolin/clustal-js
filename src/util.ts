@@ -1,5 +1,5 @@
 export function parseVersion(line: string) {
-  const res = line.match(/\(?(\d+(\.\d+)+)\)?/)
+  const res = /\(?(\d+(\.\d+)+)\)?/.exec(line)
   return res && res.length > 1 ? res[1] : ''
 }
 export function parseHeader(info: string) {
@@ -43,10 +43,10 @@ export function parseBlock(arr: Iterator<string>) {
   }
 
   while (line) {
-    if (!line[0].startsWith(' ')) {
-      block.push(line)
-    } else {
+    if (line[0].startsWith(' ')) {
       consensusLine = line
+    } else {
+      block.push(line)
     }
     line = arr.next().value
   }

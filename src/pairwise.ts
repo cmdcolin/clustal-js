@@ -19,10 +19,10 @@ export function parsePairwiseBlock(arr: Iterator<string>) {
   }
 
   while (line) {
-    if (!line.startsWith(' ')) {
-      block.push(line)
-    } else {
+    if (line.startsWith(' ')) {
       consensusLine = line
+    } else {
+      block.push(line)
     }
     line = arr.next().value
   }

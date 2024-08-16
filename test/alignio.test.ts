@@ -1,4 +1,7 @@
 import { parse } from '../src'
+function throwsError() {
+  parse('')
+}
 
 // these tests derived from biopython alignIO clustal tests
 
@@ -166,9 +169,6 @@ describe('alignio ported tests', () => {
     )
   })
   it('test_empy', () => {
-    function throwsError() {
-      parse('')
-    }
     expect(throwsError).toThrowError(/Empty/)
   })
 
