@@ -24,7 +24,7 @@ export function parseClustalIter(arr: Iterator<string>) {
   return { consensus, alns, header }
 }
 
-interface Row {
+export interface Row {
   id: string
   seq: string
 }
