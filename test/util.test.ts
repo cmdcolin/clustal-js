@@ -1,4 +1,5 @@
 import { parseVersion, parseBlock } from '../src/util'
+import { test, expect } from 'vitest'
 test('versions', () => {
   expect(parseVersion('CLUSTAL (1.2.3)')).toEqual('1.2.3')
   expect(parseVersion('CLUSTALW (1.2.3)')).toEqual('1.2.3')

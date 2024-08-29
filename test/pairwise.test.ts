@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { parsePairwise } from '../src'
 import * as fs from 'fs'
 

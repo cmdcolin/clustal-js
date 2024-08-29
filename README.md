@@ -1,9 +1,10 @@
-[![NPM version](https://img.shields.io/npm/v/@gmod/bam.svg?style=flat-square)](https://npmjs.org/package/@gmod/bam)
+[![NPM version](https://img.shields.io/npm/v/clustal-js.svg?style=flat-square)](https://npmjs.org/package/clustal-js)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/cmdcolin/clustal-js/push.yml?branch=master)](https://github.com/cmdcolin/clustal-js/actions?query=branch%3Amaster+workflow%3APush+)
 
 # clustal-js
 
-This parses clustal output format
+This parses CLUSTAL (multiple sequence aligner) output format files (sometimes
+called .aln)
 
 ## Usage
 

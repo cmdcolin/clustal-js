@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`alignio ported tests test three 1`] = `
+exports[`test three 1`] = `
 {
   "alns": [
     {

@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { parse } from '../src'
 function throwsError() {
   parse('')
@@ -143,42 +144,40 @@ AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 
 `
 
-describe('alignio ported tests', () => {
-  it('test one', () => {
-    const alignment = parse(example1)
-    expect(alignment.alns.length).toEqual(2)
-    expect(alignment.alns[0].id).toEqual('gi|4959044|gb|AAD34209.1|AF069')
-    expect(alignment.alns[1].id).toEqual('gi|671626|emb|CAA85685.1|')
-    expect(alignment.alns[0].seq).toEqual(
-      'MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN' +
-        'LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW' +
-        'LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT' +
-        'SENESEPSTRRLSVENMESSSQRQMENSASESASARPSRAERNSTEAVTE' +
-        'VPTTRAQRRA',
-    )
-  })
+test('test one', () => {
+  const alignment = parse(example1)
+  expect(alignment.alns.length).toEqual(2)
+  expect(alignment.alns[0].id).toEqual('gi|4959044|gb|AAD34209.1|AF069')
+  expect(alignment.alns[1].id).toEqual('gi|671626|emb|CAA85685.1|')
+  expect(alignment.alns[0].seq).toEqual(
+    'MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN' +
+      'LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW' +
+      'LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT' +
+      'SENESEPSTRRLSVENMESSSQRQMENSASESASARPSRAERNSTEAVTE' +
+      'VPTTRAQRRA',
+  )
+})
 
-  it('test two', () => {
-    const alignment = parse(example2)
-    expect(alignment.alns.length).toEqual(9)
-    expect(alignment.alns.at(-1)?.id).toEqual('HISJ_E_COLI')
-    expect(alignment.alns.at(-1)?.seq).toEqual(
-      'MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG' +
-        'TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS' +
-        'LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV',
-    )
-  })
-  it('test_empy', () => {
-    expect(throwsError).toThrowError(/Empty/)
-  })
+test('test two', () => {
+  const alignment = parse(example2)
+  expect(alignment.alns.length).toEqual(9)
+  expect(alignment.alns.at(-1)?.id).toEqual('HISJ_E_COLI')
+  expect(alignment.alns.at(-1)?.seq).toEqual(
+    'MKKLVLSLSLVLAFSSATAAF-------------------AAIPQNIRIG' +
+      'TDPTYAPFESKNS-QGELVGFDIDLAKELCKRINTQCTFVENPLDALIPS' +
+      'LKAKKIDAIMSSLSITEKRQQEIAFTDKLYAADSRLV',
+  )
+})
+test('test_empy', () => {
+  expect(throwsError).toThrowError(/Empty/)
+})
 
-  it('test three', () => {
-    const alignments = parse(example3)
-    expect(alignments).toMatchSnapshot()
-  })
+test('test three', () => {
+  const alignments = parse(example3)
+  expect(alignments).toMatchSnapshot()
+})
 
-  it('test kalign', () => {
-    const alignments = parse(example4)
-    expect(alignments.alns.length).toEqual(2)
-  })
+test('test kalign', () => {
+  const alignments = parse(example4)
+  expect(alignments.alns.length).toEqual(2)
 })
