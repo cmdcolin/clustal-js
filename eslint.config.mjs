@@ -1,8 +1,10 @@
 import eslint from '@eslint/js'
+import { defineConfig } from 'eslint/config'
+import importPlugin from 'eslint-plugin-import'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
 
-export default tseslint.config(
+export default defineConfig(
   { ignores: ['dist/*', 'esm/*', '*.js', '*.mjs'] },
   {
     languageOptions: {
@@ -12,12 +14,14 @@ export default tseslint.config(
       },
     },
   },
+
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   ...tseslint.configs.stylisticTypeChecked,
   ...tseslint.configs.strictTypeChecked,
+  importPlugin.flatConfigs.recommended,
+  eslintPluginUnicorn.configs.recommended,
 
-  eslintPluginUnicorn.configs['flat/recommended'],
   {
     rules: {
       '@typescript-eslint/no-unused-vars': [

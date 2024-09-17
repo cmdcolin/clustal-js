@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`pairwise 1`] = `
+exports[`pairwise with position numbers 1`] = `
 {
   "alns": [
     {

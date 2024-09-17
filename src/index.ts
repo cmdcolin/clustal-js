@@ -1,5 +1,5 @@
-import { parsePairwiseBlocks } from './pairwise'
-import { parseBlocks, parseHeader, getFirstNonEmptyLine } from './util'
+import { parsePairwiseBlocks } from './pairwise.ts'
+import { parseBlocks, parseHeader, getFirstNonEmptyLine } from './util.ts'
 
 export function parseClustalIter(arr: Iterator<string>) {
   const line = getFirstNonEmptyLine(arr)

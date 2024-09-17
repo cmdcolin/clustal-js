@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { parse } from '../src'
+import { parse } from '../src/index.ts'
 import * as fs from 'fs'
 
 test('a large clustal', async () => {

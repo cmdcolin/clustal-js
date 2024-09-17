@@ -1,8 +1,16 @@
 {
   "name": "clustal-js",
   "version": "2.0.6",
-  "main": "dist/index.js",
-  "module": "esm/index.js",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "import": {
+      "import": "./esm/index.js"
+    },
+    "require": {
+      "require": "./dist/index.js"
+    }
+  },
   "repository": "cmdcolin/clustal-js",
   "files": [
     "dist",
@@ -12,25 +20,26 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.1.0",
-    "@typescript-eslint/parser": "^8.1.0",
     "eslint": "^9.9.0",
-    "eslint-plugin-unicorn": "^55.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-unicorn": "^62.0.0",
     "prettier": "^3.2.5",
     "rimraf": "^6.0.1",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.1.0",
-    "vitest": "^2.0.5"
+    "vitest": "^4.0.16"
   },
   "scripts": {
     "clean": "rimraf dist esm",
-    "test": "vitest run",
+    "test": "vitest",
     "lint": "eslint --report-unused-disable-directives --max-warnings 0",
-    "build": "npm run build:esm && npm run build:es5",
-    "build:esm": "tsc --target es2018 --outDir esm",
-    "build:es5": "tsc --target es2015 --module commonjs --outDir dist",
-    "prebuild": "npm run clean",
-    "preversion": "npm run lint && npm test && npm run build",
+    "format": "prettier --write .",
+    "build:esm": "tsc --outDir esm",
+    "build:es5": "tsc --module commonjs --outDir dist",
+    "build": "yarn build:esm && yarn build:es5",
+    "prebuild": "yarn clean",
+    "postbuild:es5": "echo '{\"type\": \"commonjs\"}' > dist/package.json",
+    "preversion": "yarn lint && yarn test --run && yarn build",
     "postversion": "git push --follow-tags"
   }
 }

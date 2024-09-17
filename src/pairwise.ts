@@ -1,40 +1,54 @@
-import { getFirstNonEmptyLine } from './util'
+import { getFirstNonEmptyLine } from './util.ts'
 
-export function getSeqBounds(line: string) {
-  const fields = line.split(/\s+/)
-  const k1 = fields[0].length + fields[1].length
-  const temp = line.slice(k1)
-  const s = k1 + temp.indexOf(fields[2])
-  const e = s + fields[2].length
-  return [s, e] as const
+function isSequenceLine(line: string) {
+  const trimmed = line.trim()
+  return /^\w+\s+/.test(trimmed)
+}
+
+function hasPositionNumbers(fields: string[]) {
+  return fields.length >= 3 && /^\d+$/.test(fields[1])
+}
+
+export function getSeqBounds(line: string, seqIndex: number) {
+  const trimmed = line.trim()
+  const fields = trimmed.split(/\s+/)
+  const seq = fields[seqIndex]
+  const seqStart = line.indexOf(seq, line.indexOf(fields[0]) + fields[0].length)
+  return [seqStart, seqStart + seq.length] as const
 }
 
 // Use the first block to get the sequence identifiers
 export function parsePairwiseBlock(arr: Iterator<string>) {
   let line = getFirstNonEmptyLine(arr)
-  const block = []
+  const block: string[] = []
   let consensusLine = ''
   if (!line) {
     return undefined
   }
 
   while (line) {
-    if (line.startsWith(' ')) {
-      consensusLine = line
-    } else {
+    if (isSequenceLine(line)) {
       block.push(line)
+    } else {
+      consensusLine = line
     }
     line = arr.next().value
   }
-  const [start, end] = getSeqBounds(block[0])
-  const fields = block.map(s => s.split(/\s+/))
+
+  if (block.length === 0) {
+    return undefined
+  }
+
+  const fields = block.map(s => s.trim().split(/\s+/))
+  const seqIndex = hasPositionNumbers(fields[0]) ? 2 : 1
+  const [start, end] = getSeqBounds(block[0], seqIndex)
   const ids = fields.map(s => s[0])
-  const seqs = fields.map(s => s[2])
+  const seqs = fields.map(s => s[seqIndex])
   let consensus = consensusLine.slice(start, end)
 
   // handle if the consensus trailing whitespace got trimmed
   const remainder = seqs[0].length - consensus.length
-  if (remainder) {
+  if (remainder > 0) {
     consensus += ' '.repeat(remainder)
   }
   return { ids, seqs, consensus }
