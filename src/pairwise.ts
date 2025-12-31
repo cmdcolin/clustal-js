@@ -1,8 +1,17 @@
 import { getFirstNonEmptyLine } from './util.ts'
 
+function isRulerLine(line: string) {
+  const trimmed = line.trim()
+  if (!trimmed) {
+    return false
+  }
+  const fields = trimmed.split(/\s+/)
+  return fields.every(f => /^\d+$/.test(f))
+}
+
 function isSequenceLine(line: string) {
   const trimmed = line.trim()
-  return /^\w+\s+/.test(trimmed)
+  return /^\w+\s+/.test(trimmed) && !isRulerLine(line)
 }
 
 function hasPositionNumbers(fields: string[]) {
@@ -27,7 +36,9 @@ export function parsePairwiseBlock(arr: Iterator<string>) {
   }
 
   while (line) {
-    if (isSequenceLine(line)) {
+    if (isRulerLine(line)) {
+      // skip position ruler lines
+    } else if (isSequenceLine(line)) {
       block.push(line)
     } else {
       consensusLine = line
