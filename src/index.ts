@@ -15,9 +15,9 @@ export function parseClustalIter(arr: Iterator<string>) {
 
   const alns = res.seqs.map((n, index) => ({ id: res.ids[index], seq: n }))
   const { consensus } = res
-  if (consensus.length != alns[0].seq.length) {
+  if (consensus.length != alns[0]!.seq.length) {
     throw new Error(
-      `Consensus length != sequence length. Con ${consensus.length} seq ${alns[0].seq.length}`,
+      `Consensus length != sequence length. Con ${consensus.length} seq ${alns[0]!.seq.length}`,
     )
   }
 
@@ -28,27 +28,6 @@ export interface Row {
   id: string
   seq: string
 }
-export function parsePairwiseIter(arr: string) {
-  const res = parsePairwiseBlocks(arr.split('\n')[Symbol.iterator]())
-  if (res === undefined) {
-    throw new Error('No blocks parsed')
-  }
-
-  const alns = res.seqs.map((n, index) => ({ id: res.ids[index], seq: n }))
-  const { consensus } = res
-  if (consensus.length != alns[0].seq.length) {
-    throw new Error(
-      `Consensus length != sequence length. Con ${consensus.length} seq ${alns[0].seq.length}`,
-    )
-  }
-  if (alns.length !== 2) {
-    throw new Error('More than two sequences in pairwise alignment')
-  }
-  return {
-    consensus,
-    alns: alns as [Row, Row],
-  }
-}
 
 export function parse(contents: string) {
   const iter = contents.split('\n')[Symbol.iterator]()
@@ -56,10 +35,34 @@ export function parse(contents: string) {
 }
 
 export function parsePairwise(contents: string) {
-  return parsePairwiseIter(
-    contents
-      .split('\n')
-      .filter(f => !f.startsWith('#'))
-      .join('\n'),
-  )
+  const filtered = contents
+    .split('\n')
+    .filter(f => !f.startsWith('#'))
+    .join('\n')
+
+  const res = parsePairwiseBlocks(filtered.split('\n')[Symbol.iterator]())
+  if (res === undefined) {
+    throw new Error('No blocks parsed')
+  }
+
+  const alns = res.seqs.map((n, index) => ({ id: res.ids[index], seq: n }))
+  const { consensus } = res
+  const firstAln = alns[0]
+  if (!firstAln) {
+    throw new Error('No alignments found')
+  }
+  if (consensus.length !== firstAln.seq.length) {
+    throw new Error(
+      `Consensus length !== sequence length. Con ${consensus.length} seq ${firstAln.seq.length}`,
+    )
+  }
+  if (alns.length !== 2) {
+    throw new Error(
+      `Expected exactly 2 sequences in pairwise alignment, got ${alns.length}`,
+    )
+  }
+  return {
+    consensus,
+    alns: alns as [Row, Row],
+  }
 }

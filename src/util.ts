@@ -27,9 +27,9 @@ export function getFirstNonEmptyLine(arr: Iterator<string>): string {
 
 export function getSeqBounds(line: string) {
   const fields = line.split(/\s+/)
-  const temp = line.slice(fields[0].length)
-  const s = fields[0].length + temp.indexOf(fields[1])
-  const e = s + fields[1].length
+  const temp = line.slice(fields[0]!.length)
+  const s = fields[0]!.length + temp.indexOf(fields[1]!)
+  const e = s + fields[1]!.length
   return [s, e] as const
 }
 
@@ -43,25 +43,29 @@ export function parseBlock(arr: Iterator<string>) {
   }
 
   while (line) {
-    if (line[0].startsWith(' ')) {
+    if (line.startsWith(' ')) {
       consensusLine = line
     } else {
       block.push(line)
     }
     line = arr.next().value
   }
-  const [start, end] = getSeqBounds(block[0])
+  const [start, end] = getSeqBounds(block[0]!)
   const fields = block.map(s => s.split(/\s+/))
   const ids = fields.map(s => s[0])
   const seqs = block.map(s => s.slice(start, end))
   let consensus = consensusLine.slice(start, end)
 
   // handle if the consensus trailing whitespace got trimmed
-  const remainder = seqs[0].length - consensus.length
+  const remainder = seqs[0]!.length - consensus.length
   if (remainder) {
     consensus += ' '.repeat(remainder)
   }
-  return { ids, seqs, consensus }
+  return {
+    ids,
+    seqs,
+    consensus,
+  }
 }
 
 export function parseBlocks(arr: Iterator<string>) {
@@ -70,7 +74,7 @@ export function parseBlocks(arr: Iterator<string>) {
   if (res !== undefined) {
     while ((block = parseBlock(arr))) {
       for (let i = 0; i < block.seqs.length; i++) {
-        res.seqs[i] += block.seqs[i]
+        res.seqs[i]! += block.seqs[i]!
       }
       res.consensus += block.consensus
     }

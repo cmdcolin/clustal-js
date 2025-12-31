@@ -15,14 +15,17 @@ function isSequenceLine(line: string) {
 }
 
 function hasPositionNumbers(fields: string[]) {
-  return fields.length >= 3 && /^\d+$/.test(fields[1])
+  return fields.length >= 3 && /^\d+$/.test(fields[1]!)
 }
 
-export function getSeqBounds(line: string, seqIndex: number) {
+function getSeqBounds(line: string, seqIndex: number) {
   const trimmed = line.trim()
   const fields = trimmed.split(/\s+/)
-  const seq = fields[seqIndex]
-  const seqStart = line.indexOf(seq, line.indexOf(fields[0]) + fields[0].length)
+  const seq = fields[seqIndex]!
+  const seqStart = line.indexOf(
+    seq,
+    line.indexOf(fields[0]!) + fields[0]!.length,
+  )
   return [seqStart, seqStart + seq.length] as const
 }
 
@@ -51,18 +54,29 @@ export function parsePairwiseBlock(arr: Iterator<string>) {
   }
 
   const fields = block.map(s => s.trim().split(/\s+/))
-  const seqIndex = hasPositionNumbers(fields[0]) ? 2 : 1
-  const [start, end] = getSeqBounds(block[0], seqIndex)
-  const ids = fields.map(s => s[0])
-  const seqs = fields.map(s => s[seqIndex])
+  const firstField = fields[0]
+  if (!firstField) {
+    return undefined
+  }
+  const seqIndex = hasPositionNumbers(firstField) ? 2 : 1
+  const [start, end] = getSeqBounds(block[0]!, seqIndex)
+  const ids = fields.map(s => s[0]!)
+  const seqs = fields.map(s => s[seqIndex]!)
   let consensus = consensusLine.slice(start, end)
 
   // handle if the consensus trailing whitespace got trimmed
-  const remainder = seqs[0].length - consensus.length
-  if (remainder > 0) {
-    consensus += ' '.repeat(remainder)
+  const firstSeq = seqs[0]
+  if (firstSeq) {
+    const remainder = firstSeq.length - consensus.length
+    if (remainder > 0) {
+      consensus += ' '.repeat(remainder)
+    }
   }
-  return { ids, seqs, consensus }
+  return {
+    ids,
+    seqs,
+    consensus,
+  }
 }
 
 export function parsePairwiseBlocks(arr: Iterator<string>) {
@@ -71,7 +85,7 @@ export function parsePairwiseBlocks(arr: Iterator<string>) {
   if (res !== undefined) {
     while ((block = parsePairwiseBlock(arr))) {
       for (let i = 0; i < block.seqs.length; i++) {
-        res.seqs[i] += block.seqs[i]
+        res.seqs[i]! += block.seqs[i]!
       }
       res.consensus += block.consensus
     }

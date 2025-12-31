@@ -12,6 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
+    "noUncheckedIndexedAccess": true,
     "esModuleInterop": true
   }
 }
