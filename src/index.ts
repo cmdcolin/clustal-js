@@ -13,7 +13,7 @@ export function parseClustalIter(arr: Iterator<string>) {
     throw new Error('No blocks parsed')
   }
 
-  const alns = res.seqs.map((n, index) => ({ id: res.ids[index], seq: n }))
+  const alns = res.seqs.map((n, index) => ({ id: res.ids[index]!, seq: n }))
   const { consensus } = res
   if (consensus.length != alns[0]!.seq.length) {
     throw new Error(
@@ -45,7 +45,7 @@ export function parsePairwise(contents: string) {
     throw new Error('No blocks parsed')
   }
 
-  const alns = res.seqs.map((n, index) => ({ id: res.ids[index], seq: n }))
+  const alns = res.seqs.map((n, index) => ({ id: res.ids[index]!, seq: n }))
   const { consensus } = res
   const firstAln = alns[0]
   if (!firstAln) {
