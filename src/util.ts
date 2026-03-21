@@ -22,7 +22,7 @@ export function getFirstNonEmptyLine(arr: Iterator<string>): string {
   while (!line.done && line.value.trim() === '') {
     line = arr.next()
   }
-  return line.value
+  return line.value!
 }
 
 export function getSeqBounds(line: string) {
@@ -74,7 +74,7 @@ export function parseBlocks(arr: Iterator<string>) {
   if (res !== undefined) {
     while ((block = parseBlock(arr))) {
       for (let i = 0; i < block.seqs.length; i++) {
-        res.seqs[i]! += block.seqs[i]!
+        res.seqs[i] += block.seqs[i]!
       }
       res.consensus += block.consensus
     }

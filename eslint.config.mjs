@@ -1,6 +1,6 @@
 import eslint from '@eslint/js'
 import { defineConfig } from 'eslint/config'
-import importPlugin from 'eslint-plugin-import'
+import importPlugin from 'eslint-plugin-import-x'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
 
@@ -34,10 +34,14 @@ export default defineConfig(
 
       'no-underscore-dangle': 'off',
       curly: 'error',
-      '@typescript-eslint/no-explicit-any': 'off',
+      eqeqeq: 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        { 'ts-expect-error': 'allow-with-description', 'ts-ignore': true },
+      ],
       semi: ['error', 'never'],
       'unicorn/prefer-node-protocol': 'off',
       'unicorn/prevent-abbreviations': 'off',
@@ -48,8 +52,12 @@ export default defineConfig(
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/restrict-plus-operands': 'off',
       '@typescript-eslint/prefer-nullish-coalescing': 'off',
-      '@typescript-eslint/restrict-template-expressions': 'off',
+      '@typescript-eslint/restrict-template-expressions': [
+        'error',
+        { allowNumber: true },
+      ],
       '@typescript-eslint/require-await': 'off',
     },
   },

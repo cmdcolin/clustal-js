@@ -159,3 +159,11 @@ b                209 ENSSRSMVSSVSL*    222
 ### Notes
 
 See tests for example files
+
+## Publishing
+
+[Trusted publishing](https://docs.npmjs.com/about-trusted-publishing) via GitHub Actions.
+
+```bash
+npm version patch  # or minor/major
+```

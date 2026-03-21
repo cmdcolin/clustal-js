@@ -169,7 +169,7 @@ test('test two', () => {
   )
 })
 test('test_empy', () => {
-  expect(throwsError).toThrowError(/Empty/)
+  expect(throwsError).toThrow(/Empty/)
 })
 
 test('test three', () => {

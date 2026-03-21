@@ -15,7 +15,7 @@ export function parseClustalIter(arr: Iterator<string>) {
 
   const alns = res.seqs.map((n, index) => ({ id: res.ids[index]!, seq: n }))
   const { consensus } = res
-  if (consensus.length != alns[0]!.seq.length) {
+  if (consensus.length !== alns[0]!.seq.length) {
     throw new Error(
       `Consensus length != sequence length. Con ${consensus.length} seq ${alns[0]!.seq.length}`,
     )
