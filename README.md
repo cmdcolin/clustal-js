@@ -166,5 +166,5 @@ See tests for example files
 Actions.
 
 ```bash
-npm version patch  # or minor/major
+pnpm version patch  # or minor/major
 ```
