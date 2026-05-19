@@ -1,5 +1,5 @@
 [![NPM version](https://img.shields.io/npm/v/clustal-js.svg?style=flat-square)](https://npmjs.org/package/clustal-js)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/cmdcolin/clustal-js/publish.yml?branch=master)](https://github.com/cmdcolin/clustal-js/actions?query=branch%3Amaster+workflow%3APush+)
+![Build Status](https://img.shields.io/github/actions/workflow/status/cmdcolin/clustal-js/publish.yml?branch=master)
 
 # clustal-js
 
