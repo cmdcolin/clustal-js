@@ -147,9 +147,9 @@ AT3G20900.1-SEQ      GCTGGGGATGGAGAGGGAACAGAGTAG
 test('test one', () => {
   const alignment = parse(example1)
   expect(alignment.alns.length).toEqual(2)
-  expect(alignment.alns[0].id).toEqual('gi|4959044|gb|AAD34209.1|AF069')
-  expect(alignment.alns[1].id).toEqual('gi|671626|emb|CAA85685.1|')
-  expect(alignment.alns[0].seq).toEqual(
+  expect(alignment.alns[0]!.id).toEqual('gi|4959044|gb|AAD34209.1|AF069')
+  expect(alignment.alns[1]!.id).toEqual('gi|671626|emb|CAA85685.1|')
+  expect(alignment.alns[0]!.seq).toEqual(
     'MENSDSNDKGSDQSAAQRRSQMDRLDREEAFYQFVNNLSEEDYRLMRDNN' +
       'LLGTPGESTEEELLRRLQQIKEGPPPQSPDENRAGESSDDVTNSDSIIDW' +
       'LNSVRQTGNTTRSRQRGNQSWRAVSRTNPNSGDFRFSLEINVNRNNGSQT' +

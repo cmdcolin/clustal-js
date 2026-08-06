@@ -23,7 +23,7 @@ test('block', () => {
   const ret = parseBlock(iter)
   expect(ret).toBeTruthy()
   expect(ret!.consensus.length).toEqual(60)
-  expect(ret!.seqs[0].length).toEqual(60)
+  expect(ret!.seqs[0]!.length).toEqual(60)
 })
 test('end block', () => {
   const b = `sp|P69905|HBA_HUMAN       AVHASLDKFLASVSTVLTSKYR	142
@@ -33,7 +33,7 @@ test('end block', () => {
   const ret = parseBlock(iter)
   expect(ret).toBeTruthy()
   expect(ret!.consensus.length).toEqual(22)
-  expect(ret!.seqs[0].length).toEqual(22)
+  expect(ret!.seqs[0]!.length).toEqual(22)
 })
 test('empty consensus with trimmed line', () => {
   const b = `sp|P69905|HBA_HUMAN       AVHASLDKFLASVSTVLTSKYR	142
@@ -43,7 +43,7 @@ test('empty consensus with trimmed line', () => {
   const ret = parseBlock(iter)
   expect(ret).toBeTruthy()
   expect(ret!.consensus.length).toEqual(22)
-  expect(ret!.seqs[0].length).toEqual(22)
+  expect(ret!.seqs[0]!.length).toEqual(22)
 })
 test('empty consensus with spaces', () => {
   const b = `sp|P69905|HBA_HUMAN       AVHASLDKFLASVSTVLTSKYR	142
@@ -53,7 +53,7 @@ test('empty consensus with spaces', () => {
   const ret = parseBlock(iter)
   expect(ret).toBeTruthy()
   expect(ret!.consensus.length).toEqual(22)
-  expect(ret!.seqs[0].length).toEqual(22)
+  expect(ret!.seqs[0]!.length).toEqual(22)
 })
 
 test('consensus line had trailing whitespace clipped', () => {
@@ -66,5 +66,5 @@ sp|P13786|HBAZ_CAPHI      DAHAAWDKFLSIVSGVLTEKYR	142
   const ret = parseBlock(iter)
   expect(ret).toBeTruthy()
   expect(ret!.consensus.length).toEqual(22)
-  expect(ret!.seqs[0].length).toEqual(22)
+  expect(ret!.seqs[0]!.length).toEqual(22)
 })
