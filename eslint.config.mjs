@@ -4,7 +4,20 @@ import importPlugin from 'eslint-plugin-import-x'
 import tseslint from 'typescript-eslint'
 
 export default defineConfig(
-  { ignores: ['dist/*', 'esm/*', '*.js', '*.mjs'] },
+  {
+    ignores: [
+      'dist/*',
+      'esm/*',
+      '*.js',
+      '*.mjs',
+      // agent worktrees are whole checkouts of this repo living inside it, so
+      // without this eslint lints every one of them against the root
+      // tsconfig.lint.json and fails on files that are not in it. gitignored,
+      // but eslint does not read .gitignore
+      '.claude/**',
+      'vitest.config.ts',
+    ],
+  },
   {
     languageOptions: {
       parserOptions: {

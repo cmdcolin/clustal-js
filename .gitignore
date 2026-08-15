@@ -6,3 +6,5 @@ yarn-error.log
 out.txt
 .eslintcache
 esm
+.claude/settings.local.json
+.claude/worktrees/
