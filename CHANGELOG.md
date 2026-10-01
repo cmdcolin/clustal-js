@@ -1,3 +1,16 @@
+## [2.0.19](https://github.com/cmdcolin/clustal-js/compare/v2.0.18...v2.0.19) (2026-10-01)
+
+### Chores
+
+- Render only the commit subject, and link the commit ([d498008](https://github.com/cmdcolin/clustal-js/commit/d498008667d216d955f170079c3f610c0e560550))
+- Create a GitHub release for each published tag ([2bd50d7](https://github.com/cmdcolin/clustal-js/commit/2bd50d78e2004b0e7195a2f006a360d9709a4ea9))
+- Enforce type strippability in tsconfig ([dd65fce](https://github.com/cmdcolin/clustal-js/commit/dd65fce92c1845cc4881e22e12e4ab6428bc37a8))
+- Keep agent worktrees out of the toolchain's way ([dfcb459](https://github.com/cmdcolin/clustal-js/commit/dfcb459dcbdc81824b9b85c036fdb99650289f87))
+
+### Documentation
+
+- Correct the release command in CONTRIBUTING, and its voice ([fb98f04](https://github.com/cmdcolin/clustal-js/commit/fb98f0477409b6ab754dd2ffd3559118dd8c8ae6))
+
 ## [2.0.18](https://github.com/cmdcolin/clustal-js/compare/v2.0.17...v2.0.18) (2026-08-10)
 
 ### Chores
