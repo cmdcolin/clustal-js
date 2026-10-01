@@ -47,9 +47,6 @@
     "postversion": "git push --follow-tags",
     "build": "pnpm build:esm && pnpm build:es5"
   },
-  "dependencies": {
-    "@jbrowse/quick-lru": "^7.3.5"
-  },
   "keywords": [
     "bioinformatics"
   ],
