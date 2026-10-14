@@ -63,7 +63,7 @@ Output
 ```typescript
 import { parsePairwise } from 'clustal-js'
 const file = fs.readFileSync('test.aln', 'utf8')
-const ret = parse(file)
+const ret = parsePairwise(file)
 ```
 
 Input test.aln (e.g. from EMBOSS needle)
