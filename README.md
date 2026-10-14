@@ -158,7 +158,7 @@ b                209 ENSSRSMVSSVSL*    222
 
 ### Notes
 
-The tests contain example files.
+See tests for example files
 
 ## Publishing
 
