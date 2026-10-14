@@ -3,8 +3,8 @@
 
 # clustal-js
 
-This parses CLUSTAL (multiple sequence aligner) output format files (sometimes
-called .aln)
+clustal-js parses CLUSTAL (multiple sequence aligner) output format files
+(sometimes called .aln)
 
 ## Usage
 
@@ -158,7 +158,7 @@ b                209 ENSSRSMVSSVSL*    222
 
 ### Notes
 
-See tests for example files
+The tests contain example files.
 
 ## Publishing
 
